@@ -1,6 +1,6 @@
-import json
+import json, secrets, string
 
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, request, make_response
 
 app: Flask = Flask(__name__)
 
@@ -16,10 +16,26 @@ article_map = {
     i: article for i, article in enumerate(articles)
 }
 
+clicks = []
+
+
+def make_cookie() -> str:
+    alphabet = string.ascii_letters + string.digits
+    cookie = ''.join(secrets.choice(alphabet) for i in range(32))
+    return cookie
+
 
 @app.route("/")
 def home():
-    return render_template("News.html", articles=art_keys)
+    # make response
+    response = make_response(render_template("News.html", articles=art_keys))
+    cookies = request.cookies
+    # check for user_id
+    if "user_id"  not in cookies:
+        cookie = make_cookie()
+        response.set_cookie("user_id", cookie)
+
+    return response
 
 
 @app.route("/register")
@@ -35,8 +51,17 @@ def login():
 @app.route("/click/<int:key>")
 def click(key: int):
     article = article_map[key]
+    source = article["source"]
     # need to save user click
+    id = request.cookies.get("user_id")
+    click = {
+        "user_id": id,
+        "art_key": key,
+        "source": source["name"]
+    }
+    clicks.append(click)
     print("Got click")
+    print(clicks)
     link = article["url"]
 
     # send to link
