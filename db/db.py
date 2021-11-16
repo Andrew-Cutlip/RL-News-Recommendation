@@ -1,6 +1,6 @@
 import pymongo
 
-client = pymongo.MongoClient()
+client = pymongo.MongoClient("localhost", 27017)
 
 db = client["test"]
 
@@ -13,4 +13,5 @@ def add_click(click: dict):
 
 def get_all_clicks():
     all_clicks = clicks.find({})
-    return all_clicks
+    ret_val = [click for click in all_clicks]
+    return ret_val

@@ -1,4 +1,5 @@
 import json, secrets, string
+import db.db as db
 
 from flask import Flask, render_template, redirect, request, make_response
 
@@ -15,8 +16,6 @@ art_keys = enumerate(articles)
 article_map = {
     i: article for i, article in enumerate(articles)
 }
-
-clicks = []
 
 
 def make_cookie() -> str:
@@ -40,7 +39,10 @@ def home():
 
 @app.route("/register")
 def register():
-    return "Registered"
+    if request.method == "POST":
+        pass
+    else:
+        return render_template("Register.html")
 
 
 @app.route("/login")
@@ -59,8 +61,9 @@ def click(key: int):
         "art_key": key,
         "source": source["name"]
     }
-    clicks.append(click)
+    db.add_click(click)
     print("Got click")
+    clicks = db.get_all_clicks()
     print(clicks)
     link = article["url"]
 
