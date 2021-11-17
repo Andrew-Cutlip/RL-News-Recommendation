@@ -1,7 +1,7 @@
 import json, secrets, string
 import db.db as db
 
-from flask import Flask, render_template, redirect, request, make_response
+from flask import Flask, render_template, redirect, request, make_response, send_from_directory
 
 app: Flask = Flask(__name__)
 
@@ -37,15 +37,27 @@ def home():
     return response
 
 
-@app.route("/register")
+@app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
-        pass
+        # handle registration form data
+        username = request.form["username"]
+        print(username)
+        password = request.form["password"]
+        print(password)
+        # want to check if username and password are good
+        age = request.form["age"]
+        print(age)
+        gender = request.form["gender"]
+        print(gender)
+
+
+        return render_template("News.html")
     else:
         return render_template("Register.html")
 
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
     return "Logged in"
 
@@ -69,6 +81,11 @@ def click(key: int):
 
     # send to link
     return redirect(link)
+
+
+@app.route("/static/<path:path>")
+def send_static(path: str):
+    return send_from_directory("./static", path)
 
 
 # Press the green button in the gutter to run the script.
