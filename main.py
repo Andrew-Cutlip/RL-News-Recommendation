@@ -50,7 +50,18 @@ def register():
         print(age)
         gender = request.form["gender"]
         print(gender)
-
+        general = request.form["g"]
+        print(general)
+        business = request.form["b"]
+        print(business)
+        entertainment = request.form["e"]
+        print(entertainment)
+        health = request.form["h"]
+        print(health)
+        science = request.form["sc"]
+        print(science)
+        sp = request.form["sp"]
+        print(sp)
 
         return render_template("News.html")
     else:
