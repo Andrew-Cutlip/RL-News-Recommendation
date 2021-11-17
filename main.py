@@ -70,7 +70,14 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    return "Logged in"
+    if request.method == "POST":
+        # process login
+        username = request.form["username"]
+        password = request.form["password"]
+
+        # check this
+    else:
+        return render_template("Login.html")
 
 
 @app.route("/click/<int:key>")
