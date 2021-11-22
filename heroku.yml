@@ -3,4 +3,4 @@ build:
     web: Dockerfile
 
 run:
-  web: python main.py
+  web: python main.py $PORT

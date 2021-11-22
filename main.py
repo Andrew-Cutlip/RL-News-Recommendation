@@ -1,5 +1,6 @@
 import json, secrets, string
 import db.db as db
+import sys
 
 from flask import Flask, render_template, redirect, request, make_response, send_from_directory
 
@@ -110,6 +111,7 @@ def send_static(path: str):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
+    app.run(host="0.0.0.0", port=port)
     print("Flask server Running!\n")
 
