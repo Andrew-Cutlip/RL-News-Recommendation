@@ -26,6 +26,7 @@ def make_cookie() -> str:
 
 @app.route("/")
 def home():
+    print("Got Request")
     # make response
     response = make_response(render_template("News.html", articles=art_keys))
     cookies = request.cookies
@@ -110,4 +111,5 @@ def send_static(path: str):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000)
+    print("Flask server Running!\n")
 
