@@ -30,7 +30,7 @@ def home():
     response = make_response(render_template("News.html", articles=art_keys))
     cookies = request.cookies
     # check for user_id
-    if "user_id"  not in cookies:
+    if "user_id" not in cookies:
         cookie = make_cookie()
         response.set_cookie("user_id", cookie)
 
@@ -88,6 +88,7 @@ def click(key: int):
     id = request.cookies.get("user_id")
     click = {
         "user_id": id,
+
         "art_key": key,
         "source": source["name"]
     }
