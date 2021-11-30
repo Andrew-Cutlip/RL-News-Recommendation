@@ -94,3 +94,30 @@ def get_user_clicks(client_id: int):
     conn.commit()
 
 
+def insert_articles(articles: list):
+    sql = """
+        INSERT INTO articles
+        
+    """
+
+
+def insert_client(client: dict):
+    sql = """
+        INSERT INTO clients
+        VALUES (%s, %s, %S)
+    """
+
+    cur.execute(sql, (client["cookie"], client["is_user"], client["user_id"]))
+
+    conn.commit()
+
+
+def get_category_id(name: str):
+    sql = """
+        SELECT category_id FROM categories
+        WHERE category_name = (%s)
+    """
+
+    cur.execute(sql, name)
+
+    conn.commit()
