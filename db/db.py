@@ -12,9 +12,10 @@ cur = conn.cursor()
 tables = (
     """
     CREATE TABLE IF NOT EXISTS clicks (
-        click_id INTEGER PRIMARY KEY NOT NULL,
+        click_id SERIAL PRIMARY KEY NOT NULL,
         art_id INTEGER NOT NULL,
-        source_id INTEGER NOT NULL,
+        client_id INTEGER NOT NULL,
+        clicked BOOLEAN NOT NULL,
         FOREIGN KEY (art_id) 
             REFERENCES articles (art_id)
             ON UPDATE CASCADE ON DELETE CASCADE,
@@ -22,13 +23,13 @@ tables = (
     """,
     """
     CREATE TABLE IF NOT EXISTS sources ( 
-        source_id INTEGER PRIMARY KEY NOT NULL,
+        source_id SERIAL PRIMARY KEY NOT NULL,
         source_name VARCHAR(255) NOT NULL
     )
     """,
     """
     CREATE TABLE IF NOT EXISTS articles ( 
-        art_id INTEGER PRIMARY KEY NOT NULL,
+        art_id SERIAL PRIMARY KEY NOT NULL,
         category_id INTEGER NOT NULL ,
         source_id INTEGER NOT NULL,
         author VARCHAR(255) NOT NULL,
@@ -43,13 +44,13 @@ tables = (
     """,
     """
     CREATE TABLE IF NOT EXISTS categories (
-        category_id INTEGER PRIMARY KEY,
+        category_id SERIAL PRIMARY KEY,
         category_name VARCHAR(255) NOT NULL,
     )
     """,
     """
     CREATE TABLE IF NOT EXISTS users ( 
-        user_id INTEGER PRIMARY KEY,
+        user_id SERIAL PRIMARY KEY,
         password_hash BYTE NOT NULL,
         age INTEGER NOT NULL,
         gender VARCHAR(255) NOT NULL,
@@ -60,14 +61,36 @@ tables = (
         science_rate INT NOT NULL,
         sports_rate INT NOT NULL
     )
+    """,
+    """
+        CREATE TABLE IF NOT EXISTS clients (
+            client_id SERIAL PRIMARY KEY,
+            cookie VARCHAR(255) NOT NULL,
+            is_user BOOLEAN NOT NULL,
+            user_id INTEGER  
+        )
     """
 )
 
-def add_click(click: dict):
-    clicks.insert_one(click)
+
+def insert_click(click: dict):
+    # need to insert a click with client id , article id
+    sql = """ INSERT INTO clicks
+    VALUES (%s, %s)
+    """
+    cur.execute(sql, (click["client_id"], click["art_id"]))
+
+    conn.commit()
 
 
-def get_all_clicks():
-    all_clicks = clicks.find({})
-    ret_val = [click for click in all_clicks]
-    return ret_val
+def get_user_clicks(client_id: int):
+    sql = """
+        SELECT * FROM clicks
+        WHERE client_id = (%s)
+    """
+
+    cur.execute(sql, client_id)
+
+    conn.commit()
+
+
