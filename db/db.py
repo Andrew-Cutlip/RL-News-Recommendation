@@ -96,6 +96,9 @@ def get_user_clicks(client_id: int):
 
     conn.commit()
 
+    rows = cur.fetchall()
+    return rows
+
 
 def insert_articles(articles: list):
     sql = """
@@ -124,6 +127,20 @@ def insert_client(client: dict):
     conn.commit()
 
 
+def get_client_by_cookie(cookie: str):
+    sql = """
+                SELECT * FROM clients
+                WHERE cookie = (%s)
+            """
+
+    cur.execute(sql, cookie)
+
+    conn.commit()
+
+    row = cur.fetchone()
+    return row
+
+
 def get_article_by_id(article_id: int):
     sql = """
             SELECT * FROM articles
@@ -133,6 +150,9 @@ def get_article_by_id(article_id: int):
     cur.execute(sql, article_id)
 
     conn.commit()
+
+    row = cur.fetchone()
+    return row
 
 
 def get_category_id(name: str):
@@ -145,6 +165,9 @@ def get_category_id(name: str):
 
     conn.commit()
 
+    row = cur.fetchone()
+    return row
+
 
 def get_source_id(name: str):
     sql = """
@@ -155,3 +178,6 @@ def get_source_id(name: str):
     cur.execute(sql, name)
 
     conn.commit()
+
+    row = cur.fetchone()
+    return row

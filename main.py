@@ -84,10 +84,14 @@ def login():
 
 @app.route("/click/<int:key>")
 def click(key: int):
-    article = article_map[key]
-    source = article["source"]
+    #article = article_map[key]
+    article = db.get_article_by_id(key)
+    # working with source ids now
+    source_id = article["source_id"]
     # need to save user click
-    id = request.cookies.get("user_id")
+    user_id = request.cookies.get("user_id")
+    # check if logged in
+
     click = {
         "user_id": id,
 
@@ -102,6 +106,8 @@ def click(key: int):
 
     # send to link
     return redirect(link)
+
+def rate(key: int):
 
 
 @app.route("/static/<path:path>")
