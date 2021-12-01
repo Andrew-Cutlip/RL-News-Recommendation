@@ -111,6 +111,7 @@ def set_rating(rating: int, art_id: int, client_id: int):
 
     conn.commit()
 
+
 def get_user_clicks(client_id: int):
     sql = """
         SELECT * FROM clicks
@@ -178,6 +179,14 @@ def get_article_by_id(article_id: int):
 
     row = cur.fetchone()
     return row
+
+
+def insert_category(name: str):
+    pass
+
+
+def get_all_categories():
+    pass
 
 
 def get_category_id(name: str):

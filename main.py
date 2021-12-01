@@ -103,8 +103,12 @@ def click(key: int):
 def rate(key: int):
     article = db.get_article_by_id(key)
     user_id = request.cookies.get("user_id")
-
-
+    client = db.get_client_by_cookie(user_id)
+    client_id = client[0]
+    # get rating somehow
+    rating = 5
+    db.set_rating(rating, key, client_id)
+    print("Rated")
 
 
 @app.route("/static/<path:path>")
