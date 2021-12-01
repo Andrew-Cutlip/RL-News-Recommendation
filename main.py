@@ -28,6 +28,7 @@ def make_cookie() -> str:
 @app.route("/")
 def home():
     print("Got Request")
+    # here is where user info will be requested and recommendations will be made
     # make response
     response = make_response(render_template("News.html", articles=art_keys))
     cookies = request.cookies
@@ -84,30 +85,26 @@ def login():
 
 @app.route("/click/<int:key>")
 def click(key: int):
-    #article = article_map[key]
+    # just need to update click already in db
     article = db.get_article_by_id(key)
-    # working with source ids now
-    source_id = article["source_id"]
     # need to save user click
     user_id = request.cookies.get("user_id")
     # check if logged in
-
-    click = {
-        "user_id": id,
-
-        "art_key": key,
-        "source": source["name"]
-    }
-    db.add_click(click)
+    client = db.get_client_by_cookie(user_id)
+    client_id = client[0]
+    db.set_click(key, client_id)
     print("Got click")
-    clicks = db.get_all_clicks()
-    print(clicks)
-    link = article["url"]
-
+    link = article[6]
     # send to link
     return redirect(link)
 
+
+@app.route("/rate/<int:key>")
 def rate(key: int):
+    article = db.get_article_by_id(key)
+    user_id = request.cookies.get("user_id")
+
+
 
 
 @app.route("/static/<path:path>")

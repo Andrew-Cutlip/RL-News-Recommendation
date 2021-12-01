@@ -16,6 +16,8 @@ tables = (
         art_id INTEGER NOT NULL,
         client_id INTEGER NOT NULL,
         clicked BOOLEAN NOT NULL,
+        rated BOOLEAN NOT NULL,
+        rating INTEGER,
         FOREIGN KEY (art_id) 
             REFERENCES articles (art_id)
             ON UPDATE CASCADE ON DELETE CASCADE,
@@ -85,6 +87,29 @@ def insert_click(click: dict):
 
     conn.commit()
 
+
+def set_click(art_id: int, client_id: int):
+    sql = """
+        UPDATE clicks
+        SET clicked = True
+        WHERE art_id = (%s) AND client_id = (%s)
+    """
+
+    cur.execute(sql, (art_id, client_id))
+
+    conn.commit()
+
+
+def set_rating(rating: int, art_id: int, client_id: int):
+    sql = """
+        UPDATE clicks
+        SET rating = (%s)
+        WHERE art_id = (%s) AND client_id = (%s)
+    """
+
+    cur.execute(sql, (rating, art_id, client_id))
+
+    conn.commit()
 
 def get_user_clicks(client_id: int):
     sql = """
