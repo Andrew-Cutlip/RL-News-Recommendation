@@ -1,4 +1,4 @@
-import pymongo
+# import pymongo
 import psycopg2
 
 # client = pymongo.MongoClient("localhost", 27017)
@@ -38,6 +38,9 @@ tables = (
         content VARCHAR(255) NOT NULL,
         url VARCHAR(255) NOT NULL,
         FOREIGN KEY (category_id) 
+            REFERENCES categories (category_id)
+            ON UPDATE CASCADE ON DELETE CASCADE,
+        FOREIGN KEY (source_id) 
             REFERENCES categories (category_id)
             ON UPDATE CASCADE ON DELETE CASCADE,
     )
@@ -97,8 +100,17 @@ def get_user_clicks(client_id: int):
 def insert_articles(articles: list):
     sql = """
         INSERT INTO articles
-        
+        VALUES (%s, %s, %s, %s, %s, %s, %s)
     """
+
+    for article in articles:
+        cur.execute(sql,
+                    (article["category_id"], article["source_id"],
+                     article["author"], article["title"], article["description"],
+                     article["content"], article["url"])
+                    )
+
+    conn.commit()
 
 
 def insert_client(client: dict):
@@ -112,11 +124,33 @@ def insert_client(client: dict):
     conn.commit()
 
 
+def get_article_by_id(article_id: int):
+    sql = """
+            SELECT * FROM articles
+            WHERE art_id = (%s)
+        """
+
+    cur.execute(sql, article_id)
+
+    conn.commit()
+
+
 def get_category_id(name: str):
     sql = """
         SELECT category_id FROM categories
         WHERE category_name = (%s)
     """
+
+    cur.execute(sql, name)
+
+    conn.commit()
+
+
+def get_source_id(name: str):
+    sql = """
+            SELECT source_id FROM categories
+            WHERE source_name = (%s)
+        """
 
     cur.execute(sql, name)
 
