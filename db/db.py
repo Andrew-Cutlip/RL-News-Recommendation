@@ -77,6 +77,7 @@ tables = [
 
 
 def create_tables(ts):
+    print("Creating tables!\n")
     for table in ts:
         print(table)
         cur.execute(table)
