@@ -36,6 +36,15 @@ def home():
     if "user_id" not in cookies:
         cookie = make_cookie()
         response.set_cookie("user_id", cookie)
+        # need to add to client db
+        user_id = - 1
+        is_user = False
+        client = {
+            "user_id": user_id,
+            "is_user": is_user,
+            "cookie": cookie
+        }
+        db.insert_client(client)
 
     return response
 
@@ -65,6 +74,21 @@ def register():
         print(science)
         sp = request.form["sp"]
         print(sp)
+        # hash password
+        # need to update client in db and add to users
+        user = {
+            "password": password,
+            "age": age,
+            "gender": gender,
+            "e": entertainment,
+            "b": business,
+            "g": general,
+            "h": health,
+            "sc": science,
+            "sp": sp
+        }
+        user_id = db.insert_user(user)
+        db.register_client(user_id)
 
         return render_template("News.html")
     else:

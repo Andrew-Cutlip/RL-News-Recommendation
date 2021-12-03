@@ -1,8 +1,11 @@
 # import pymongo
 import psycopg2
+import os
 
-# client = pymongo.MongoClient("localhost", 27017)
-conn = psycopg2.connect("dbname=rl user=postgres password=postgres")
+
+DATABASE_URL = os.environ["DATABASE_URL"]
+
+conn = psycopg2.connect(DATABASE_URL, sslmode="require")
 cur = conn.cursor()
 # db = client["test"]
 
@@ -145,12 +148,41 @@ def insert_articles(articles: list):
 def insert_client(client: dict):
     sql = """
         INSERT INTO clients
-        VALUES (%s, %s, %S)
+        VALUES (%s, %s, %s)
     """
 
     cur.execute(sql, (client["cookie"], client["is_user"], client["user_id"]))
 
     conn.commit()
+
+
+def register_client(user_id: int):
+    sql = """
+        UPDATE clients
+        SET is_user = True
+        SET user_id = (%s)
+    """
+
+    cur.execute(sql, user_id)
+
+
+def insert_user(user: dict):
+    sql = """
+        INSERT INTO users
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+        RETURNING user_id
+    """
+
+    cur.execute(sql, (user["password"], user["age"],
+                      user["gender"], user["g"],
+                      user["b"], user["e"], user["h"],
+                      user["sc"], user["sp"]))
+
+    conn.commit()
+
+    id = conn.fetchone()[0]
+
+    return id
 
 
 def get_client_by_cookie(cookie: str):
@@ -182,11 +214,27 @@ def get_article_by_id(article_id: int):
 
 
 def insert_category(name: str):
-    pass
+    sql = """
+        INSERT INTO categories
+        VALUES (%s)
+    """
+
+    cur.execute(sql, name)
+
+    conn.commit()
 
 
 def get_all_categories():
-    pass
+    sql = """
+        SELECT name FROM categories
+    """
+
+    cur.execute(sql)
+
+    conn.commit()
+
+    rows = cur.fetchall()
+    return rows
 
 
 def get_category_id(name: str):
