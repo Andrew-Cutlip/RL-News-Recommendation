@@ -6,18 +6,6 @@ from flask import Flask, render_template, redirect, request, make_response, send
 
 app: Flask = Flask(__name__)
 
-file = open("./data/general.json", "r")
-general = json.load(file)
-
-
-articles = general["articles"]
-
-art_keys = enumerate(articles)
-
-article_map = {
-    i: article for i, article in enumerate(articles)
-}
-
 
 def make_cookie() -> str:
     alphabet = string.ascii_letters + string.digits
@@ -29,6 +17,16 @@ def make_cookie() -> str:
 def home():
     print("Got Request")
     # here is where user info will be requested and recommendations will be made
+    file = open("./data/general.json" , "r")
+    general = json.load(file)
+
+    articles = general["articles"]
+
+    art_keys = enumerate(articles)
+
+    article_map = {
+        i: article for i , article in enumerate(articles)
+    }
     # make response
     response = make_response(render_template("News.html", articles=art_keys))
     cookies = request.cookies
