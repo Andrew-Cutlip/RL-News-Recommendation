@@ -157,11 +157,13 @@ def insert_articles(articles: list):
 
 def insert_client(client: dict):
     sql = """
-        INSERT INTO clients
+        INSERT INTO clients(cookie, is_user)
         VALUES (%s, %s, %s)
     """
-
-    cur.execute(sql, (client["cookie"], client["is_user"], client["user_id"]))
+    c_id = "NULL"
+    if client["user_id"] != -1:
+        c_id = client["user_id"]
+    cur.execute(sql, (client["cookie"], client["is_user"], c_id))
 
     conn.commit()
 
