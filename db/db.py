@@ -49,7 +49,7 @@ tables = [
     """
     CREATE TABLE IF NOT EXISTS categories (
         category_id SERIAL PRIMARY KEY,
-        category_name VARCHAR(255) NOT NULL,
+        category_name VARCHAR(255) NOT NULL
     )
     """,
     """
@@ -77,8 +77,9 @@ tables = [
 ]
 
 
-def create_tables(tables):
-    for table in tables:
+def create_tables(ts):
+    for table in ts:
+        print(table)
         cur.execute(table)
 
     conn.commit()
