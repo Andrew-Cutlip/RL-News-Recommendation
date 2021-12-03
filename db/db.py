@@ -19,13 +19,13 @@ tables = [
         FOREIGN KEY (art_id) 
             REFERENCES articles (art_id)
             ON UPDATE CASCADE ON DELETE CASCADE,
-    )
+    );
     """,
     """
     CREATE TABLE IF NOT EXISTS sources ( 
         source_id SERIAL PRIMARY KEY NOT NULL,
         source_name VARCHAR(255) NOT NULL
-    )
+    );
     """,
     """
     CREATE TABLE IF NOT EXISTS articles ( 
@@ -43,13 +43,13 @@ tables = [
         FOREIGN KEY (source_id) 
             REFERENCES categories (category_id)
             ON UPDATE CASCADE ON DELETE CASCADE,
-    )
+    );
     """,
     """
     CREATE TABLE IF NOT EXISTS categories (
         category_id SERIAL PRIMARY KEY,
         category_name VARCHAR(255) NOT NULL
-    )
+    );
     """,
     """
     CREATE TABLE IF NOT EXISTS users ( 
@@ -63,7 +63,7 @@ tables = [
         health_rate INT NOT NULL,
         science_rate INT NOT NULL,
         sports_rate INT NOT NULL
-    )
+    );
     """,
     """
         CREATE TABLE IF NOT EXISTS clients (
@@ -71,7 +71,7 @@ tables = [
             cookie VARCHAR(255) NOT NULL,
             is_user BOOLEAN NOT NULL,
             user_id INTEGER  
-        )
+        );
     """
 ]
 
