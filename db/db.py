@@ -161,6 +161,7 @@ def insert_client(client: dict):
         VALUES (%s, %s, %s)
     """
     if client["user_id"] != -1:
+        print(client)
         c_id = client["user_id"]
         sql = """
             INSERT INTO clients(cookie, is_user, user_id)
@@ -168,7 +169,7 @@ def insert_client(client: dict):
         """
         cur.execute(sql, (client["cookie"], client["is_user"], c_id))
     else:
-        cur.execute(sql , (client["cookie"] , client["is_user"] ))
+        cur.execute(sql, (client["cookie"], client["is_user"]))
 
     conn.commit()
 
