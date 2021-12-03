@@ -59,7 +59,7 @@ tables = [
             is_user BOOLEAN NOT NULL,
             user_id INTEGER  
             FOREIGN KEY (user_id) 
-                REFERENCES users
+                REFERENCES users (user_id)
                 ON UPDATE CASCADE ON DELETE CASCADE
         );
     """,
