@@ -9,16 +9,9 @@ cur = conn.cursor()
 # noinspection SqlNoDataSourceInspection
 tables = [
     """
-    CREATE TABLE IF NOT EXISTS clicks (
-        click_id SERIAL PRIMARY KEY NOT NULL,
-        art_id INTEGER NOT NULL,
-        client_id INTEGER NOT NULL,
-        clicked BOOLEAN NOT NULL,
-        rated BOOLEAN NOT NULL,
-        rating INTEGER,
-        FOREIGN KEY (art_id) 
-            REFERENCES articles (art_id)
-            ON UPDATE CASCADE ON DELETE CASCADE
+    CREATE TABLE IF NOT EXISTS categories (
+        category_id SERIAL PRIMARY KEY,
+        category_name VARCHAR(255) NOT NULL
     );
     """,
     """
@@ -41,14 +34,8 @@ tables = [
             REFERENCES categories (category_id)
             ON UPDATE CASCADE ON DELETE CASCADE,
         FOREIGN KEY (source_id) 
-            REFERENCES categories (category_id)
-            ON UPDATE CASCADE ON DELETE CASCADE,
-    );
-    """,
-    """
-    CREATE TABLE IF NOT EXISTS categories (
-        category_id SERIAL PRIMARY KEY,
-        category_name VARCHAR(255) NOT NULL
+            REFERENCES sources (source_id)
+            ON UPDATE CASCADE ON DELETE CASCADE
     );
     """,
     """
@@ -71,7 +58,26 @@ tables = [
             cookie VARCHAR(255) NOT NULL,
             is_user BOOLEAN NOT NULL,
             user_id INTEGER  
+            FOREIGN KEY (user_id) 
+                REFERENCES users
+                ON UPDATE CASCADE ON DELETE CASCADE
         );
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS clicks (
+        click_id SERIAL PRIMARY KEY NOT NULL,
+        art_id INTEGER NOT NULL,
+        client_id INTEGER NOT NULL,
+        clicked BOOLEAN NOT NULL,
+        rated BOOLEAN NOT NULL,
+        rating INTEGER,
+        FOREIGN KEY (art_id) 
+            REFERENCES articles (art_id)
+            ON UPDATE CASCADE ON DELETE CASCADE,
+        FOREIGN KEY (client_id)
+            REFERENCES clients (client_id)
+            ON UPDATE CASCADE ON DELETE CASCADE
+    );
     """
 ]
 
