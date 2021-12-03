@@ -41,7 +41,7 @@ tables = [
     """
     CREATE TABLE IF NOT EXISTS users ( 
         user_id SERIAL PRIMARY KEY,
-        password_hash BYTE NOT NULL,
+        password_hash BYTEA NOT NULL,
         age INTEGER NOT NULL,
         gender VARCHAR(255) NOT NULL,
         general_rate INT NOT NULL,
