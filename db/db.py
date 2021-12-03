@@ -158,7 +158,7 @@ def insert_articles(articles: list):
 def insert_client(client: dict):
     sql = """
         INSERT INTO clients(cookie, is_user)
-        VALUES (%s, %s, %s)
+        VALUES (%s, %s)
     """
     if client["user_id"] != -1:
         print(client)
