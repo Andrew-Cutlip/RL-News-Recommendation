@@ -81,6 +81,16 @@ tables = (
 )
 
 
+def create_tables(tables):
+    for table in tables:
+        cur.execute(table)
+
+    conn.commit()
+
+
+create_tables(tables)
+
+
 def insert_click(click: dict):
     # need to insert a click with client id , article id
     sql = """ INSERT INTO clicks
