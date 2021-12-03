@@ -7,12 +7,8 @@ DATABASE_URL = os.environ["DATABASE_URL"]
 
 conn = psycopg2.connect(DATABASE_URL, sslmode="require")
 cur = conn.cursor()
-# db = client["test"]
-
-# clicks = db.clicks
-
 # noinspection SqlNoDataSourceInspection
-tables = (
+tables = [
     """
     CREATE TABLE IF NOT EXISTS clicks (
         click_id SERIAL PRIMARY KEY NOT NULL,
@@ -78,7 +74,7 @@ tables = (
             user_id INTEGER  
         )
     """
-)
+]
 
 
 def create_tables(tables):
