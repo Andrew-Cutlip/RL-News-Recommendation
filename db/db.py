@@ -57,7 +57,7 @@ tables = [
             client_id SERIAL PRIMARY KEY,
             cookie VARCHAR(255) NOT NULL,
             is_user BOOLEAN NOT NULL,
-            user_id INTEGER  
+            user_id INTEGER,  
             FOREIGN KEY (user_id) 
                 REFERENCES users (user_id)
                 ON UPDATE CASCADE ON DELETE CASCADE
