@@ -18,7 +18,7 @@ tables = [
         rating INTEGER,
         FOREIGN KEY (art_id) 
             REFERENCES articles (art_id)
-            ON UPDATE CASCADE ON DELETE CASCADE,
+            ON UPDATE CASCADE ON DELETE CASCADE
     );
     """,
     """
