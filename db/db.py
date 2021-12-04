@@ -281,3 +281,14 @@ def get_source_id(name: str):
 
     row = cur.fetchone()
     return row
+
+
+def insert_sources(sources: list):
+    sql = """
+        INSERT INTO sources
+        VALUES (%s)
+    """
+    for source in sources:
+        cur.execute(sql, source)
+
+    conn.commit()

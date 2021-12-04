@@ -10,3 +10,8 @@ def insert_json(filename: str):
 
 def add_sources(articles: list):
     sources = [article["source"]["name"] for article in articles]
+
+    distinct = set(sources)
+
+    for source in distinct:
+        db.insert
