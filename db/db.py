@@ -168,6 +168,8 @@ def insert_articles(articles: list):
             article["author"] = "None"
         if article.get("content") is None:
             article["content"] = "None"
+        if article.get("description") is None:
+            articles["description"] = "None"
 
         print(article)
         cur.execute(sql,
