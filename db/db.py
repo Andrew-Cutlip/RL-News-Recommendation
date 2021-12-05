@@ -151,7 +151,7 @@ def insert_articles(articles: list):
 
     for article in articles:
         category = article["category"]
-        source = article["source"]
+        source = article["source"]["name"]
         cat_id = get_category_id(category)
         source_id = get_source_id(source)
         cur.execute(sql,
@@ -283,7 +283,7 @@ def get_source_id(name: str):
             WHERE source_name = (%s)
         """
 
-    cur.execute(sql, name)
+    cur.execute(sql, (name, ))
 
     conn.commit()
 
