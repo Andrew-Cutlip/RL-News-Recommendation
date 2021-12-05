@@ -11,7 +11,7 @@ def random_articles(n: int):
     articles = db.get_all_articles()
     print(len(articles))
     print(type(articles))
-
-    rand = articles[np.random.choice(len(articles), n, replace=False)]
+    arts = np.array(articles)
+    rand = arts[np.random.choice(len(articles), n, replace=False)]
     return rand
 
