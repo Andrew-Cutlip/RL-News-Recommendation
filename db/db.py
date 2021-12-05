@@ -31,8 +31,8 @@ tables = [
         source_id INTEGER NOT NULL,
         author VARCHAR(255) NOT NULL,
         title VARCHAR(255) NOT NULL,
-        description VARCHAR(255) NOT NULL,
-        content VARCHAR(1024) NOT NULL,
+        description TEXT NOT NULL,
+        content TEXT NOT NULL,
         url VARCHAR(255) NOT NULL,
         FOREIGN KEY (category_id) 
             REFERENCES categories (category_id)
