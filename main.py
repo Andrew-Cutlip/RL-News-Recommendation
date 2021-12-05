@@ -42,6 +42,8 @@ def home():
             "cookie": cookie
         }
         db.insert_client(client)
+        # need to get clicks for starting state
+        last_clicks = []
     arts = 10
     rand = reccomend.random_articles(arts)
     articles = reccomend.add_source_names(rand)
@@ -60,8 +62,7 @@ def home():
 
     # make response
     response = make_response(render_template("News.html", articles=articles))
-    response.set_cookie("user_id" , cookie)
-    # check for user_id
+    response.set_cookie("user_id", cookie)
 
 
     return response

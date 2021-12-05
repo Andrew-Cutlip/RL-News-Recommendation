@@ -116,10 +116,14 @@ def insert_click(click: dict):
     # need to insert a click with client id , article id
     sql = """ INSERT INTO clicks(art_id, client_id, clicked, rated, list_number)
     VALUES (%s, %s, False, False, %s)
+    RETURNING click_id
     """
-    cur.execute(sql, ( click["art_id"], click["client_id"], click["position"]))
+    cur.execute(sql, (click["art_id"], click["client_id"], click["position"]))
 
     conn.commit()
+
+    click_id = cur.fetchone()[0]
+    return click_id
 
 
 def set_click(art_id: int, client_id: int):
