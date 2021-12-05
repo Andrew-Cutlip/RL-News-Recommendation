@@ -326,8 +326,10 @@ def get_all_articles():
     cur.execute(sql)
 
     conn.commit()
-
-    articles = cur.fetchall()
+    articles = []
+    arts = cur.fetchall()
+    for art in arts:
+        articles.append(art)
     return articles
 
 
