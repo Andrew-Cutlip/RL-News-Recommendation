@@ -21,6 +21,6 @@ let rate = (link) => {
     xhr.open("POST", "/rate/"+ rating );
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify({
-            "link": link.dataset.track
+            "rating": rating
         }));
 }

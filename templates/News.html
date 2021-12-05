@@ -20,7 +20,8 @@
                 <p>By: {{ article[3] }}</p>
                 <p>{{ article[5] }}</p>
                 <p>{{ article[6] }}</p>
-                <form>
+            </a>
+            <form>
                 <p>Rating</p>
                     <div class="stars">
                         <input type="radio" id="star1" name="star" value="1">
@@ -36,7 +37,6 @@
                         <input type="submit" onclick="rate(this)">
                     </div>
                 </form>
-            </a>
         </div>
     {% endfor %}
 </body>
