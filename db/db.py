@@ -318,5 +318,18 @@ def insert_sources(sources: list):
     conn.commit()
 
 
+def get_all_articles():
+    sql = """
+        SELECT * FROM articles
+    """
+
+    cur.execute(sql)
+
+    conn.commit()
+
+    articles = cur.fetchall()
+    return articles
+
+
 if __name__ == "__main__":
     pass
