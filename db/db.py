@@ -70,6 +70,7 @@ tables = [
         client_id INTEGER NOT NULL,
         clicked BOOLEAN NOT NULL,
         rated BOOLEAN NOT NULL,
+        list_number INTEGER NOT NULL,
         rating INTEGER,
         FOREIGN KEY (art_id) 
             REFERENCES articles (art_id)
@@ -103,10 +104,10 @@ def drop_articles():
 
 def insert_click(click: dict):
     # need to insert a click with client id , article id
-    sql = """ INSERT INTO clicks
-    VALUES (%s, %s)
+    sql = """ INSERT INTO clicks(art_id, client_id, clicked, rated, list_number)
+    VALUES (%s, %s, False, False, %s)
     """
-    cur.execute(sql, (click["client_id"], click["art_id"]))
+    cur.execute(sql, ( click["art_id"], click["client_id"], click["position"]))
 
     conn.commit()
 
