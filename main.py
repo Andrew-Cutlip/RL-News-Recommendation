@@ -133,6 +133,8 @@ def click(key: int):
     client_id = client[0]
     db.set_click(key, client_id)
     print("Got click")
+    res = make_response(("", 204))
+    return res
 
 
 @app.route("/rate/<int:key>")
