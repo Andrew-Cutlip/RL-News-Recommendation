@@ -54,7 +54,7 @@ def store_replays(last_clicks: list,  actions: list, results: list):
             s1_list = [last_clicks]
             s2_list = [results]
             a_list = [actions]
-        
+
         new_data = {"s1": s1_list, "a": a_list, "s2": s2_list}
         new_data_json = json.dumps(new_data)
     with open(filename, "w") as file:
