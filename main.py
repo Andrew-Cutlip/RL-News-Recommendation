@@ -166,7 +166,7 @@ if __name__ == '__main__':
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
     # db.drop_articles()
     # need to drop click for new format
-    db.drop_clicks()
+    # db.drop_clicks()
     db.create_tables(db.tables)
     # add stuff to db.
     prefix = "data/"
