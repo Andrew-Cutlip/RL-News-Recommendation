@@ -11,13 +11,13 @@ let track = (link, id) => {
 
 let rate = (e, id) => {
     let ratings = document.getElementsByName("star" + id);
-    e.preventDefault();
     let rating = 3;
     for (let i = 0; i < ratings.length; i++) {
         if (ratings[i].checked) {
             rating = ratings[i].value ;
         }
     }
+    console.log("Got rating on " + id + " of " + rating)
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "/rate/"+ id + "/" + rating );
     xhr.setRequestHeader("Content-Type", "application/json");
