@@ -1,6 +1,7 @@
 import json, secrets, string
 import db.db as db
 import state
+import reccomend
 import sys
 import data.insert as insert
 from flask import Flask, render_template, redirect, request, make_response, send_from_directory
@@ -32,6 +33,9 @@ def home():
             print("Logged in user")
             # probably want to get all clicks maybe from multiple clients for one user
 
+    arts = 10
+    rand = reccomend.random_articles(10)
+    print(rand)
     # here is where user info will be requested and recommendations will be made
     file = open("./data/general.json", "r")
     general = json.load(file)
