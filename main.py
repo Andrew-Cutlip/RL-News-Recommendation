@@ -1,7 +1,7 @@
 import json, secrets, string
 import db.db as db
 import sys
-
+import data.insert as insert
 from flask import Flask, render_template, redirect, request, make_response, send_from_directory
 
 app: Flask = Flask(__name__)
@@ -142,6 +142,28 @@ def send_static(path: str):
 if __name__ == '__main__':
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
     db.create_tables(db.tables)
+    # add stuff to db.
+    prefix = "./NewData/Final/"
+    files = [
+        prefix + "businessc.json" ,
+        prefix + "entertainmentc.json" ,
+        prefix + "generalc.json" ,
+        prefix + "healthc.json" ,
+        prefix + "sciencec.json" ,
+        prefix + "sportsc.json" ,
+        prefix + "technologyc.json"
+    ]
+    categories = [
+        "business" ,
+        "entertainment" ,
+        "general" ,
+        "health" ,
+        "science" ,
+        "sports" ,
+        "technology"
+    ]
+    articles = insert.open_articles(files , categories)
+    insert.add_sources(articles)
     app.run(host="0.0.0.0", port=port)
     print("Flask server Running!\n")
 
