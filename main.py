@@ -45,6 +45,7 @@ def home():
         # need to get clicks for starting state
         last_clicks = []
     arts = 10
+    # will want articles chosen by model
     rand = reccomend.random_articles(arts)
     articles = reccomend.add_source_names(rand)
     print("Random articles\n")
@@ -69,7 +70,6 @@ def home():
     # make response
     response = make_response(render_template("News.html", articles=articles))
     response.set_cookie("user_id", cookie)
-
 
     return response
 

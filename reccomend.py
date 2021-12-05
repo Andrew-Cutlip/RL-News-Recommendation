@@ -15,8 +15,32 @@ def load_model():
     pass
 
 
+def get_article_info(article_id: int):
+    article = db.get_article_by_id(article_id)
+    cat_id = article[1]
+    source_id = article[2]
+
+    return cat_id, source_id
+
+
 def make_recommendation(last_clicks: list):
-    pass
+    inputs = []
+    for click in last_clicks:
+        click_id = click[0]
+        art_id = click[1]
+        cat_id, source_id = get_article_info(art_id)
+        # need to get information from articles
+        client_id = click[2]
+        clicked = click[3]
+        rated = click[4]
+        list_number = click[5]
+        if rated:
+            rating = click[6]
+        else:
+            rating = 0
+
+        input_c = (click_id, art_id, cat_id, client_id, clicked, rated, list_number, rating)
+        inputs.append(input_c)
 
 
 def random_articles(n: int):
@@ -75,5 +99,8 @@ def train_model():
         indices = np.random.choice(len(replay_buffer), batch_size, replace=False)
         batch = buff[indices]
         for sample in batch:
-            client_id = sample[0]
-            reward_val = reward.calculate_reward()
+            client_id = sample[0][2]
+            recommend = sample[2]
+            # need to get actual clicks from click_ids
+            reward_val = reward.calculate_reward(client_id, recommend)
+            print(reward_val)
