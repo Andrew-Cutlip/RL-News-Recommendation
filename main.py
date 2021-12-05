@@ -52,14 +52,20 @@ def home():
     client = db.get_client_by_cookie(cookie)
     client_id = client[0]
     # need to add clicks for articles in db
+    clicks = []
+    actions = []
     for i, article in enumerate(articles):
         click = {}
         click["art_id"] = article[0]
         click["client_id"] = client_id
         click["position"] = i
 
-        db.insert_click(click)
+        click_id = db.insert_click(click)
+        clicks.append(click_id)
+        actions.append(article[0])
 
+    # add to experience replay
+    reccomend.store_replays(last_clicks, actions, clicks)
     # make response
     response = make_response(render_template("News.html", articles=articles))
     response.set_cookie("user_id", cookie)
