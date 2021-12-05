@@ -30,10 +30,10 @@ tables = [
         category_id INTEGER NOT NULL ,
         source_id INTEGER NOT NULL,
         author VARCHAR(255) NOT NULL,
-        title VARCHAR(255) NOT NULL,
+        title TEXT NOT NULL,
         description TEXT NOT NULL,
         content TEXT NOT NULL,
-        url VARCHAR(255) NOT NULL,
+        url TEXT NOT NULL,
         FOREIGN KEY (category_id) 
             REFERENCES categories (category_id)
             ON UPDATE CASCADE ON DELETE CASCADE,
@@ -94,6 +94,15 @@ def create_tables(ts):
 
     conn.commit()
 
+
+def drop_articles():
+    sql = """
+        DROP TABLE articles CASCADE 
+    """
+
+    cur.execute(sql)
+
+    conn.commit()
 
 def insert_click(click: dict):
     # need to insert a click with client id , article id
