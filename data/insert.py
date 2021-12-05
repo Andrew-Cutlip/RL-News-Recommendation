@@ -29,6 +29,11 @@ def add_sources(articles: list):
     db.insert_sources(list(distinct))
 
 
+def add_categories(categories: list):
+    for category in categories:
+        db.insert_category(category)
+
+
 if __name__ == "__main__":
     prefix = "./"
     files = [

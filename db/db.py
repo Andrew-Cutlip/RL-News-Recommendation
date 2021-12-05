@@ -293,7 +293,7 @@ def insert_sources(sources: list):
         VALUES (%s)
     """
     for source in sources:
-        print(source)
+        # print(source)
         cur.execute(sql, (source, ))
 
     conn.commit()
