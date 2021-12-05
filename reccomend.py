@@ -15,3 +15,6 @@ def random_articles(n: int):
     rand = arts[np.random.choice(len(articles), n, replace=False)]
     return rand
 
+def add_source_names(articles: list):
+    for article in articles:
+

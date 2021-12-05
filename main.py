@@ -38,18 +38,9 @@ def home():
     print("Random articles\n")
     print(rand)
     # here is where user info will be requested and recommendations will be made
-    file = open("./data/general.json", "r")
-    general = json.load(file)
 
-    articles = general["articles"]
-
-    art_keys = enumerate(articles)
-
-    article_map = {
-        i: article for i , article in enumerate(articles)
-    }
     # make response
-    response = make_response(render_template("News.html", articles=art_keys))
+    response = make_response(render_template("News.html", articles=rand))
     cookies = request.cookies
     # check for user_id
     if "user_id" not in cookies:

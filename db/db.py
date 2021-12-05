@@ -306,6 +306,20 @@ def get_source_id(name: str):
     return row
 
 
+def get_source_name(s_id: int):
+    sql = """
+        SELECT source_name FROM sources
+        WHERE source_id = (%s)
+    """
+
+    cur.execute(sql, (s_id, ))
+
+    conn.commit()
+
+    row = cur.fetchone()
+    return row
+
+
 def insert_sources(sources: list):
     sql = """
         INSERT INTO sources(source_name)

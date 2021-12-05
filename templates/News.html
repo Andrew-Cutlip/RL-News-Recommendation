@@ -11,10 +11,10 @@
     <a href="/register">Register</a>
 </nav>
 {% if articles %}
-    {% for i, article in articles%}
+    {% for article in articles%}
         <div class="article">
-            <a href="/click/{{ i}}" target="_blank">
-            <h2>{{ article.title }}</h2>
+            <a href="/click/{{ article[0] }}" target="_blank">
+            <h2>{{ article[4] }}</h2>
             <p>From {{ article.source.name }}</p>
             <p>By: {{ article.author }}</p>
             <img src="{{ article.url }}" alt={{ article.content }}/>
