@@ -232,7 +232,7 @@ def get_client_by_cookie(cookie: str):
                 WHERE cookie = (%s)
             """
 
-    cur.execute(sql, cookie)
+    cur.execute(sql, (cookie, ))
 
     conn.commit()
 
