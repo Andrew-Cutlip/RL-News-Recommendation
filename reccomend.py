@@ -9,7 +9,7 @@ def make_recommendation(last_clicks: list):
 
 def random_articles(n: int):
     articles = db.get_all_articles()
-    print(articles)
+    print(len(articles))
     rand = np.random.choice(articles, n, replace=False)
     return rand
 

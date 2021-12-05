@@ -35,6 +35,7 @@ def home():
 
     arts = 10
     rand = reccomend.random_articles(arts)
+    print("Random articles\n")
     print(rand)
     # here is where user info will be requested and recommendations will be made
     file = open("./data/general.json", "r")
