@@ -237,7 +237,7 @@ def get_article_by_id(article_id: int):
 
 def insert_category(name: str):
     sql = """
-        INSERT INTO categories
+        INSERT INTO categories(category_name)
         VALUES (%s)
     """
 
