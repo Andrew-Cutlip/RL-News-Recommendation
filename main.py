@@ -163,7 +163,7 @@ if __name__ == '__main__':
         "technology"
     ]
     articles = insert.open_articles(files , categories)
-    insert.add_categories(categories)
+    insert.add_articles(articles)
     app.run(host="0.0.0.0", port=port)
     print("Flask server Running!\n")
 

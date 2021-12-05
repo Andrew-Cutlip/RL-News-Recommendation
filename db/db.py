@@ -135,7 +135,7 @@ def get_user_clicks(client_id: int):
         WHERE client_id = (%s)
     """
 
-    cur.execute(sql, client_id)
+    cur.execute(sql, (client_id,))
 
     conn.commit()
 
@@ -150,8 +150,12 @@ def insert_articles(articles: list):
     """
 
     for article in articles:
+        category = article["category"]
+        source = article["source"]
+        cat_id = get_category_id(category)
+        source_id = get_source_id(source)
         cur.execute(sql,
-                    (article["category_id"], article["source_id"],
+                    (cat_id, source_id,
                      article["author"], article["title"], article["description"],
                      article["content"], article["url"])
                     )
@@ -185,7 +189,7 @@ def register_client(user_id: int):
         SET user_id = (%s)
     """
 
-    cur.execute(sql, user_id)
+    cur.execute(sql, (user_id, ))
 
 
 def insert_user(user: dict):
