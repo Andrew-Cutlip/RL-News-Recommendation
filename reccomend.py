@@ -43,12 +43,18 @@ def store_replays(last_clicks: list,  actions: list, results: list):
     filename = "replays.json"
     with open(filename, "r") as file:
         data = json.load(file)
-        s1_list = data["s1"]
-        s1_list.append(last_clicks)
-        s2_list = data["s2"]
-        s2_list.append(results)
-        a_list = data["a"]
-        a_list.append(actions)
+        if data is not  None:
+            s1_list = data["s1"]
+            s1_list.append(last_clicks)
+            s2_list = data["s2"]
+            s2_list.append(results)
+            a_list = data["a"]
+            a_list.append(actions)
+        else:
+            s1_list = [last_clicks]
+            s2_list = [results]
+            a_list = [actions]
+        
         new_data = {"s1": s1_list, "a": a_list, "s2": s2_list}
         new_data_json = json.dumps(new_data)
     with open(filename, "w") as file:
