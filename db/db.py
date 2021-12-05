@@ -316,7 +316,7 @@ def get_source_name(s_id: int):
 
     conn.commit()
 
-    row = cur.fetchone()
+    row = cur.fetchone()[0]
     return row
 
 
