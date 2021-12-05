@@ -23,8 +23,8 @@ def home():
         cookie = cookies["user_id"]
         client = db.get_client_by_cookie(cookie)
         print(client)
-        client_id = client["client_id"]
-        is_user = client["is_user"]
+        client_id = client[0]
+        is_user = client[2]
         num_clicks = 5
         clicks = db.get_user_clicks(client_id)
         last_clicks = state.get_last_n_click(num_clicks, clicks)
