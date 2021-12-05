@@ -10,7 +10,7 @@ let track = (link, id) => {
 
 let ratings = document.getElementsByName("star");
 
-let rate = (link) => {
+let rate = (link, id) => {
     let rating = 3;
     for (let i = 0; i < ratings.length; i++) {
         if (ratings[i].checked) {
@@ -18,7 +18,7 @@ let rate = (link) => {
         }
     }
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "/rate/"+ rating );
+    xhr.open("POST", "/rate/"+ id + "/" + rating );
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify({
             "rating": rating

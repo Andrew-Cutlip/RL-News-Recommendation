@@ -25,3 +25,6 @@ def add_source_names(articles: list):
 
     return articles
 
+
+def store_replays(last_clicks: list, reward: int, actions: list, results: list):
+    pass
