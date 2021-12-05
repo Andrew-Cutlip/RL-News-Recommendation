@@ -3,6 +3,11 @@ import db.db as db
 import numpy as np
 import json
 
+config = {
+    "num_episodes": 500,
+    "batch_size": 256,
+}
+
 
 # will want to initialize model based on saved weights on server start
 def load_model():
@@ -48,3 +53,16 @@ def store_replays(last_clicks: list,  actions: list, results: list):
         new_data_json = json.dumps(new_data)
         file.write(new_data_json)
 
+
+def train_model():
+    filename = "replays.json"
+    with open(filename, "r") as file:
+        replays = json.load(file)
+    replay_buffer = [(s1, a, s2) for s1, a, s2 in zip(replays["s1"], replays["a"], replays["s2"])]
+    buff = np.array(replay_buffer)
+    episodes = config["num_episodes"]
+    batch_size = config["batch_size"]
+    for e in range(episodes):
+        # sample replay buffer
+        indices = np.random.choice(len(replay_buffer), batch_size, replace=False)
+        batch = buff[indices]
