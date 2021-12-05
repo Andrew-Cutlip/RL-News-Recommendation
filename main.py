@@ -120,10 +120,11 @@ def login():
 
 @app.route("/click/<int:key>")
 def click(key: int):
-    print("Got click")
+    print("Got click", flush=True)
     # just need to update click already in db
     article = db.get_article_by_id(key)
-    print(article)
+    print("article")
+    print(article, flush=True)
     # need to save user click
     user_id = request.cookies.get("user_id")
     # check if logged in
@@ -132,6 +133,7 @@ def click(key: int):
     db.set_click(key, client_id)
     print("Got click")
     link = article[6]
+    print(link)
     # send to link
     return redirect(link)
 
