@@ -1,7 +1,5 @@
 import json, secrets, string
 
-from pycurl import POST
-
 import db.db as db
 import state
 import reccomend
