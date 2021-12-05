@@ -154,6 +154,7 @@ def insert_articles(articles: list):
         source = article["source"]["name"]
         cat_id = get_category_id(category)
         source_id = get_source_id(source)
+        print(article)
         cur.execute(sql,
                     (cat_id, source_id,
                      article["author"], article["title"], article["description"],
