@@ -104,6 +104,7 @@ def drop_articles():
 
     conn.commit()
 
+
 def insert_click(click: dict):
     # need to insert a click with client id , article id
     sql = """ INSERT INTO clicks
@@ -163,6 +164,8 @@ def insert_articles(articles: list):
         source = article["source"]["name"]
         cat_id = get_category_id(category)
         source_id = get_source_id(source)
+        if article.get("author") is None:
+            article["author"] = "None"
         print(article)
         cur.execute(sql,
                     (cat_id, source_id,
