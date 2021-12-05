@@ -241,7 +241,7 @@ def insert_category(name: str):
         VALUES (%s)
     """
 
-    cur.execute(sql, name)
+    cur.execute(sql, (name,))
 
     conn.commit()
 
