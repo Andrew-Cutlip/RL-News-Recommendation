@@ -293,9 +293,11 @@ def insert_sources(sources: list):
         VALUES (%s)
     """
     for source in sources:
-        cur.execute(sql, source)
+        print(source)
+        cur.execute(sql, (source, ))
 
     conn.commit()
+
 
 if __name__ == "__main__":
     pass
