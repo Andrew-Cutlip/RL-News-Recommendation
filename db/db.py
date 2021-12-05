@@ -279,7 +279,7 @@ def get_category_id(name: str):
 
 def get_source_id(name: str):
     sql = """
-            SELECT source_id FROM categories
+            SELECT source_id FROM sources
             WHERE source_name = (%s)
         """
 
