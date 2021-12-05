@@ -41,7 +41,7 @@ def add_source_names(articles: list):
 # calculate reward later
 def store_replays(last_clicks: list,  actions: list, results: list):
     filename = "replays.json"
-    with open(filename, "rw") as file:
+    with open(filename, "r") as file:
         data = json.load(file)
         s1_list = data["s1"]
         s1_list.append(last_clicks)
@@ -51,6 +51,7 @@ def store_replays(last_clicks: list,  actions: list, results: list):
         a_list.append(actions)
         new_data = {"s1": s1_list, "a": a_list, "s2": s2_list}
         new_data_json = json.dumps(new_data)
+    with open(filename, "w") as file:
         file.write(new_data_json)
 
 
