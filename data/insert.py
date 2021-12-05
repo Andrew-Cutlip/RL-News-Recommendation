@@ -30,7 +30,7 @@ def add_sources(articles: list):
 
 
 if __name__ == "__main__":
-    prefix = "./NewData/Final/"
+    prefix = "./"
     files = [
         prefix + "businessc.json",
         prefix + "entertainmentc.json",
