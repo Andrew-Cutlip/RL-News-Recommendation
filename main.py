@@ -132,11 +132,6 @@ def click(key: int):
     client_id = client[0]
     db.set_click(key, client_id)
     print("Got click")
-    link = article[6]
-    print("Link")
-    print(link, flush=True)
-    # send to link
-    return redirect(link)
 
 
 @app.route("/rate/<int:key>")
