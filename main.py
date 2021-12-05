@@ -146,6 +146,8 @@ def rate(key: int, rating: int):
     # get rating somehow
     db.set_rating(rating, key, client_id)
     print("Rated")
+    res = make_response(("", 204))
+    return res
 
 
 @app.route("/static/<path:path>")
