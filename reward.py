@@ -24,3 +24,5 @@ def calculate_reward(user_id: int , recommended: list):
                 reward += rating * pos_weight
             else:
                 reward -= rating * pos_weight
+
+    return reward
