@@ -145,7 +145,7 @@ def get_user_clicks(client_id: int):
 
 def insert_articles(articles: list):
     sql = """
-        INSERT INTO articles
+        INSERT INTO articles(category_id, source_id, author, title, description, content, url)
         VALUES (%s, %s, %s, %s, %s, %s, %s)
     """
 
