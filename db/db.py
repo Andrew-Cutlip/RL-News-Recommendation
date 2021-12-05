@@ -269,7 +269,7 @@ def get_category_id(name: str):
         WHERE category_name = (%s)
     """
 
-    cur.execute(sql, name)
+    cur.execute(sql, (name,))
 
     conn.commit()
 
