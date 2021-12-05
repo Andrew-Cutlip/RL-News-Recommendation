@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>News Articles</title>
     <link rel="stylesheet" href="/static/news.css">
+    <script src="/static/redirects.js"></script>
 </head>
 <body>
 <nav>
@@ -12,11 +13,10 @@
 </nav>
     {% for article in articles%}
         <div class="article">
-            <a href="/click/{{ article[0] }}" target="_blank">
+            <a href="{{ article[7] }}" target="_blank" onclick="track(this, {{ article[0] }})">
                 <h2>{{ article[4] }}</h2>
                 <p>From {{ article[2] }}</p>
                 <p>By: {{ article[3] }}</p>
-                <img src="{{ article[7] }}" alt={{ article[4] }}/>
                 <p>{{ article[5] }}</p>
                 <p>{{ article[6] }}</p>
             </a>

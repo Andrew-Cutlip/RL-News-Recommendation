@@ -133,7 +133,8 @@ def click(key: int):
     db.set_click(key, client_id)
     print("Got click")
     link = article[6]
-    print(link)
+    print("Link")
+    print(link, flush=True)
     # send to link
     return redirect(link)
 
