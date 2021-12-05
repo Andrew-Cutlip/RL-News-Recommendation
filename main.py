@@ -33,30 +33,36 @@ def home():
             # got logged in user
             print("Logged in user")
             # probably want to get all clicks maybe from multiple clients for one user
-
+    else:
+        cookie = make_cookie()
+        # need to add to client db
+        is_user = False
+        client = {
+            "is_user": is_user,
+            "cookie": cookie
+        }
+        db.insert_client(client)
     arts = 10
     rand = reccomend.random_articles(arts)
     articles = reccomend.add_source_names(rand)
     print("Random articles\n")
     print(rand)
-    # here is where user info will be requested and recommendations will be made
+    client = db.get_client_by_cookie(cookie)
+    client_id = client[0]
+    # need to add clicks for articles in db
+    for i, article in enumerate(articles):
+        click = {}
+        click["art_id"] = article[0]
+        click["client_id"] = client_id
+        click["position"] = i
 
+        db.insert_click(click)
+        
     # make response
     response = make_response(render_template("News.html", articles=articles))
-    cookies = request.cookies
+    response.set_cookie("user_id" , cookie)
     # check for user_id
-    if "user_id" not in cookies:
-        cookie = make_cookie()
-        response.set_cookie("user_id", cookie)
-        # need to add to client db
-        user_id = - 1
-        is_user = False
-        client = {
-            "user_id": user_id,
-            "is_user": is_user,
-            "cookie": cookie
-        }
-        db.insert_client(client)
+
 
     return response
 
