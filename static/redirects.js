@@ -10,7 +10,8 @@ let track = (link, id) => {
 
 let ratings = document.getElementsByName("star");
 
-let rate = (link, id) => {
+let rate = (e, id) => {
+    e.preventDefault();
     let rating = 3;
     for (let i = 0; i < ratings.length; i++) {
         if (ratings[i].checked) {
@@ -23,4 +24,9 @@ let rate = (link, id) => {
     xhr.send(JSON.stringify({
             "rating": rating
         }));
+}
+
+let formHandler = (e) => {
+    e.preventDefault() ;
+    return false;
 }
