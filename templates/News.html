@@ -10,7 +10,6 @@
     <a href="/login">Login</a>
     <a href="/register">Register</a>
 </nav>
-{% if articles is not None %}
     {% for article in articles%}
         <div class="article">
             <a href="/click/{{ article[0] }}" target="_blank">
@@ -23,6 +22,5 @@
             </a>
         </div>
     {% endfor %}
-{% endif %}
 </body>
 </html>
