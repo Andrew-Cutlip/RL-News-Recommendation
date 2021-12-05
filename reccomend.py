@@ -15,6 +15,13 @@ def random_articles(n: int):
     rand = arts[np.random.choice(len(articles), n, replace=False)]
     return rand
 
+
 def add_source_names(articles: list):
+
     for article in articles:
+        source_id = article[2]
+        name = db.get_source_name(source_id)
+        article[2] = name
+
+    return articles
 
