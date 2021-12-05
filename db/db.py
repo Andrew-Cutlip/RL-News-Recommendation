@@ -246,7 +246,7 @@ def get_article_by_id(article_id: int):
             WHERE art_id = (%s)
         """
 
-    cur.execute(sql, article_id)
+    cur.execute(sql, (article_id, ))
 
     conn.commit()
 
