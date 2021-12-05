@@ -120,8 +120,10 @@ def login():
 
 @app.route("/click/<int:key>")
 def click(key: int):
+    print("Got click")
     # just need to update click already in db
     article = db.get_article_by_id(key)
+    print(article)
     # need to save user click
     user_id = request.cookies.get("user_id")
     # check if logged in
