@@ -102,6 +102,16 @@ def drop_articles():
     conn.commit()
 
 
+def drop_clicks():
+    sql = """
+        DROP TABLE clicks CASCADE;
+    """
+
+    cur.execute(sql)
+
+    conn.commit()
+
+
 def insert_click(click: dict):
     # need to insert a click with client id , article id
     sql = """ INSERT INTO clicks(art_id, client_id, clicked, rated, list_number)
