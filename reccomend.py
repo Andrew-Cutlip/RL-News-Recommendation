@@ -3,6 +3,11 @@ import db.db as db
 import numpy as np
 
 
+# will want to initialize model based on saved weights on server start
+def load_model():
+    pass
+
+
 def make_recommendation(last_clicks: list):
     pass
 
