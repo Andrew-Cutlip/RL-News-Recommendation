@@ -8,7 +8,6 @@ let track = (link, id) => {
         }));
 }
 
-let ratings = document.getElementsByName("star");
 
 let ratingForms = document.getElementsByClassName("rating");
 for (let form of ratingForms){
@@ -17,6 +16,7 @@ for (let form of ratingForms){
     })
 }
 let rate = (e, id) => {
+    let ratings = document.getElementsByName("star" + id);
     e.preventDefault();
     let rating = 3;
     for (let i = 0; i < ratings.length; i++) {
