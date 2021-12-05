@@ -1,5 +1,6 @@
 import json, secrets, string
 import db.db as db
+import state
 import sys
 import data.insert as insert
 from flask import Flask, render_template, redirect, request, make_response, send_from_directory
@@ -16,8 +17,23 @@ def make_cookie() -> str:
 @app.route("/")
 def home():
     print("Got Request")
+    cookies = request.cookies
+    if "user_id" in cookies:
+        cookie = cookies["user_id"]
+        client = db.get_client_by_cookie(cookie)
+        print(client)
+        client_id = client["client_id"]
+        is_user = client["is_user"]
+        num_clicks = 5
+        clicks = db.get_user_clicks(client_id)
+        last_clicks = state.get_last_n_click(num_clicks, clicks)
+        if is_user:
+            # got logged in user
+            print("Logged in user")
+            # probably want to get all clicks maybe from multiple clients for one user
+
     # here is where user info will be requested and recommendations will be made
-    file = open("./data/general.json" , "r")
+    file = open("./data/general.json", "r")
     general = json.load(file)
 
     articles = general["articles"]

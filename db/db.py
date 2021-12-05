@@ -3,10 +3,6 @@ import psycopg2
 import os
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
-if DATABASE_URL is None:
-    DATABASE_URL = """
-    postgres://kcdbtosywnhzwu:045c2b9d4f9833e8957004d134a20d8606129746449d8825755e5ae56dd33359@ec2-34-197-181-65.compute-1.amazonaws.com:5432/dr45l95vrdjb9
-"""
 
 conn = psycopg2.connect(DATABASE_URL, sslmode="require")
 cur = conn.cursor()
