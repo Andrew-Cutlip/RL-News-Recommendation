@@ -15,10 +15,11 @@
         <div class="article">
             <a href="/click/{{ article[0] }}" target="_blank">
             <h2>{{ article[4] }}</h2>
-            <p>From {{ article.source.name }}</p>
-            <p>By: {{ article.author }}</p>
-            <img src="{{ article.url }}" alt={{ article.content }}/>
-            <p>{{ article.description }}</p>
+            <p>From {{ article[2] }}</p>
+            <p>By: {{ article[3] }}</p>
+            <img src="{{ article[7] }}" alt={{ article[4] }}/>
+            <p>{{ article[5] }}</p>
+                <p>{{ article[6] }}</p>
             </a>
         </div>
     {% endfor %}

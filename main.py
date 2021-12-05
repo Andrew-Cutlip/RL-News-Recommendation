@@ -35,12 +35,13 @@ def home():
 
     arts = 10
     rand = reccomend.random_articles(arts)
+    articles = reccomend.add_source_names(rand)
     print("Random articles\n")
     print(rand)
     # here is where user info will be requested and recommendations will be made
 
     # make response
-    response = make_response(render_template("News.html", articles=rand))
+    response = make_response(render_template("News.html", articles=articles))
     cookies = request.cookies
     # check for user_id
     if "user_id" not in cookies:
