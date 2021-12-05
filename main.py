@@ -34,7 +34,7 @@ def home():
             # probably want to get all clicks maybe from multiple clients for one user
 
     arts = 10
-    rand = reccomend.random_articles(10)
+    rand = reccomend.random_articles(arts)
     print(rand)
     # here is where user info will be requested and recommendations will be made
     file = open("./data/general.json", "r")
@@ -161,7 +161,7 @@ def send_static(path: str):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
-    db.drop_articles()
+    # db.drop_articles()
     db.create_tables(db.tables)
     # add stuff to db.
     prefix = "data/"
@@ -183,8 +183,8 @@ if __name__ == '__main__':
         "sports" ,
         "technology"
     ]
-    articles = insert.open_articles(files , categories)
-    insert.add_articles(articles)
+    # articles = insert.open_articles(files , categories)
+    # insert.add_articles(articles)
     app.run(host="0.0.0.0", port=port)
     print("Flask server Running!\n")
 
