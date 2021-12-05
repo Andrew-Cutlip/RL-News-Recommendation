@@ -1,6 +1,7 @@
 # given state take action of recommendation with best values
 import db.db as db
 import numpy as np
+import json
 
 
 # will want to initialize model based on saved weights on server start
@@ -33,4 +34,22 @@ def add_source_names(articles: list):
 
 # save as json file maybe to store for training
 def store_replays(last_clicks: list, reward: int, actions: list, results: list):
-    pass
+    filename = "replays.json"
+    with open(filename, "rw") as file:
+        data = json.load(file)
+        s1_list = data["s1"]
+        s1_list.append(last_clicks)
+        r_list = data["r"]
+        r_list.append(reward)
+        s2_list = data["s2"]
+        s2_list.append(results)
+        a_list = data["a"]
+        a_list.append(actions)
+        new_data = {}
+        new_data["s1"] = s1_list
+        new_data["r"] = r_list
+        new_data["a"] = a_list
+        new_data["s2"] = s2_list
+        new_data_json = json.dumps(new_data)
+        file.write(new_data_json)
+
