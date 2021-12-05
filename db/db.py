@@ -166,6 +166,9 @@ def insert_articles(articles: list):
         source_id = get_source_id(source)
         if article.get("author") is None:
             article["author"] = "None"
+        if article.get("content") is None:
+            article["content"] = "None"
+
         print(article)
         cur.execute(sql,
                     (cat_id, source_id,
