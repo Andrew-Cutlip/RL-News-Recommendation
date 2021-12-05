@@ -11,7 +11,7 @@ let track = (link, id) => {
 let ratings = document.getElementsByName("star");
 
 let ratingForms = document.getElementsByClassName("rating");
-for (let form in ratingForms){
+for (let form of ratingForms){
     form.addEventListener("click", (e) => {
         e.preventDefault();
     })
