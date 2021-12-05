@@ -1,4 +1,7 @@
 import json, secrets, string
+
+from pycurl import POST
+
 import db.db as db
 import state
 import reccomend
@@ -118,7 +121,7 @@ def login():
         return render_template("Login.html")
 
 
-@app.route("/click/<int:key>")
+@app.route("/click/<int:key>", methods=["POST"])
 def click(key: int):
     print("Got click", flush=True)
     # just need to update click already in db

@@ -1,7 +1,7 @@
 
 def calculate_reward(user_id: int , recommended: list):
     reward = 0
-    # items reccomended first valued more importantly
+    # items recommended first valued more importantly
     position_weights = []
     weight = 1
     length = len(recommended)
@@ -20,9 +20,15 @@ def calculate_reward(user_id: int , recommended: list):
         rated = article[5]
         if rated:
             rating = article[7]
-            if rating >= 3:
-                reward += rating * pos_weight
+            if rating == 5:
+                reward += 10 * pos_weight
+            elif rating == 4:
+                reward += 5 * pos_weight
+            elif rating == 3:
+                reward += pos_weight
+            elif rating == 2:
+                reward -= 5 * pos_weight
             else:
-                reward -= rating * pos_weight
+                reward -= 10 * pos_weight
 
     return reward
