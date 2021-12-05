@@ -3,3 +3,4 @@ newsapi~=0.1.1
 flask~=1.1.2
 numpy
 psycopg2-binary
+pycurl
