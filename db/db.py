@@ -164,6 +164,20 @@ def get_user_clicks(client_id: int):
     return rows
 
 
+def get_click_by_id(click_id: int):
+    sql = """
+        SELECT * FROM CLICKS 
+        WHERE click_id = (%s)
+    """
+
+    cur.execute(sql, (click_id,))
+
+    conn.commit()
+
+    row = cur.fetchone()
+    return row
+
+
 def insert_articles(articles: list):
     sql = """
         INSERT INTO articles(category_id, source_id, author, title, description, content, url)

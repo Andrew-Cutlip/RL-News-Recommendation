@@ -2,6 +2,7 @@
 import db.db as db
 import numpy as np
 import json
+import reward
 
 config = {
     "num_episodes": 500,
@@ -73,3 +74,6 @@ def train_model():
         # sample replay buffer
         indices = np.random.choice(len(replay_buffer), batch_size, replace=False)
         batch = buff[indices]
+        for sample in batch:
+            client_id = sample[0]
+            reward_val = reward.calculate_reward()
