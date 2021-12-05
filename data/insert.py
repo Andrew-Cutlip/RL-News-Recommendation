@@ -37,6 +37,7 @@ def add_categories(categories: list):
 def add_articles(articles: list):
     db.insert_articles(articles)
 
+
 if __name__ == "__main__":
     prefix = "./"
     files = [

@@ -10,6 +10,12 @@ let track = (link, id) => {
 
 let ratings = document.getElementsByName("star");
 
+let ratingForms = document.getElementsByClassName("rating");
+for (let form in ratingForms){
+    form.addEventListener("click", (e) => {
+        e.preventDefault();
+    })
+}
 let rate = (e, id) => {
     e.preventDefault();
     let rating = 3;

@@ -31,5 +31,6 @@ def add_source_names(articles: list):
     return articles
 
 
+# save as json file maybe to store for training
 def store_replays(last_clicks: list, reward: int, actions: list, results: list):
     pass
