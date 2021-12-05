@@ -46,7 +46,7 @@ def home():
     rand = reccomend.random_articles(arts)
     articles = reccomend.add_source_names(rand)
     print("Random articles\n")
-    print(rand)
+    # print(rand)
     client = db.get_client_by_cookie(cookie)
     client_id = client[0]
     # need to add clicks for articles in db
@@ -131,7 +131,7 @@ def click(key: int):
     # just need to update click already in db
     article = db.get_article_by_id(key)
     print("article")
-    print(article, flush=True)
+    # print(article, flush=True)
     # need to save user click
     user_id = request.cookies.get("user_id")
     # check if logged in

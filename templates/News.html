@@ -21,7 +21,7 @@
                 <p>{{ article[5] }}</p>
                 <p>{{ article[6] }}</p>
             </a>
-            <form onsubmit="formHandler()">
+            <form onsubmit="Event.preventDefault()">
                 <p>Rating</p>
                     <div class="stars">
                         <input type="radio" id="star1" name="star" value="1">
