@@ -289,7 +289,7 @@ def get_source_id(name: str):
 
 def insert_sources(sources: list):
     sql = """
-        INSERT INTO sources
+        INSERT INTO sources(source_name)
         VALUES (%s)
     """
     for source in sources:
