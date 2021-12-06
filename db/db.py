@@ -282,6 +282,15 @@ def get_article_by_id(article_id: int):
     return row
 
 
+def articles_by_ids(article_ids: list):
+    articles = []
+    for art_id in article_ids:
+        article = get_article_by_id(art_id)
+        articles.append(article)
+
+    return articles
+
+
 def insert_category(name: str):
     sql = """
         INSERT INTO categories(category_name)

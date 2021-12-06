@@ -103,8 +103,9 @@ def get_best_n_articles(values: list, n: int):
 def make_recommendation(last_clicks: list):
     inputs = get_inputs(last_clicks)
     # get values from model
-    action = model.predict(inputs)
+    action_vals = model.predict(inputs)
     # will probably need to extract article ids somehow
+    best_articles = get_best_n_articles(action_vals, config["recommendation_size"])
     # need to get articles from db and return them
 
 
