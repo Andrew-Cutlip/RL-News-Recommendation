@@ -52,7 +52,7 @@ def home():
     # print(rand)
     print("Last clicks")
     print(last_clicks, flush=True)
-    rec = recommend.make_recommendation(last_clicks)
+    rec, rec_ids, action_vals = recommend.make_recommendation(last_clicks)
     print(rec)
     print(len(rec))
     articles = recommend.add_source_names(rec)
