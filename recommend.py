@@ -116,6 +116,9 @@ def get_best_n_articles(values: list, n: int):
 
 def make_recommendation(last_clicks: list):
     inputs = get_inputs(last_clicks)
+    # need to flatten inputs
+    inputs = np.array(inputs)
+    inputs = inputs.flatten()
     # get values from model
     # action_vals = model.predict(inputs)
     action_vals = actor.predict(inputs)
