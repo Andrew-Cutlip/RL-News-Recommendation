@@ -135,6 +135,7 @@ def make_recommendation(last_clicks: list):
     action_vals = actor.predict(inputs)
     # will probably need to extract article ids somehow
     best_article_ids = get_best_n_articles(action_vals, config["recommendation_size"])
+    print(best_article_ids, flush=True)
     # need to get articles from db and return them
     best_articles = db.articles_by_ids(best_article_ids)
 
