@@ -17,6 +17,7 @@ config = {
     "input_size": 80,
     "output_size": total_num_articles,
     "alpha": 0.01,
+    "recommendation_size": 10
 }
 
 
@@ -91,6 +92,14 @@ def get_inputs(clicks: list):
     return inputs
 
 
+def get_best_n_articles(values: list, n: int):
+    # get indices of n largest values
+    indices = np.argpartition(values, - n)[- n :]
+
+    # these will be the article ids
+    return indices
+
+
 def make_recommendation(last_clicks: list):
     inputs = get_inputs(last_clicks)
     # get values from model
@@ -124,7 +133,7 @@ def store_replays(last_clicks: list,  actions: list, results: list):
     filename = "replays.json"
     with open(filename, "r") as file:
         data = json.load(file)
-        if data is not  None:
+        if data is not None:
             s1_list = data["s1"]
             s1_list.append(last_clicks)
             s2_list = data["s2"]
