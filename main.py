@@ -26,7 +26,7 @@ def home():
         print(client)
         client_id = client[0]
         is_user = client[2]
-        num_clicks = 5
+        num_clicks = 10
         clicks = db.get_user_clicks(client_id)
         last_clicks = state.get_last_n_click(num_clicks, clicks)
         if is_user:
@@ -50,6 +50,8 @@ def home():
     # articles = recommend.add_source_names(rand)
     # print("Random articles\n")
     # print(rand)
+    print("Last clicks")
+    print(last_clicks, flush=True)
     rec = recommend.make_recommendation(last_clicks)
     articles = recommend.add_source_names(rec)
 

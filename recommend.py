@@ -123,8 +123,10 @@ def make_recommendation(last_clicks: list):
     print(inputs, flush=True)
     # need to flatten inputs
     inputs: np.ndarray = np.array(inputs)
+    print(inputs.shape, flush=True)
     inputs: np.ndarray = inputs.flatten()
-    print(inputs , flush=True)
+    print(inputs, flush=True)
+    print(inputs.shape, flush=True)
     # get values from model
     # action_vals = model.predict(inputs)
     action_vals = actor.predict(inputs)
