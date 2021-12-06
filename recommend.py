@@ -128,7 +128,8 @@ def make_recommendation(last_clicks: list):
     print(inputs, flush=True)
     print(inputs.shape, flush=True)
     inputs = inputs.reshape((-1, inputs.shape[0]))
-    print(inputs , flush=True)
+    print(inputs, flush=True)
+    inputs = tf.constant(inputs)
     # get values from model
     # action_vals = model.predict(inputs)
     action_vals = actor.predict(inputs)
