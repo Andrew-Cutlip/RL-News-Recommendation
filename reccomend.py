@@ -3,11 +3,57 @@ import db.db as db
 import numpy as np
 import json
 import reward
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras import Input
+import typing
 
+total_num_articles = 3757
 config = {
     "num_episodes": 500,
     "batch_size": 256,
+    "input_size": 80,
+    "output_size": total_num_articles,
+    "alpha": 0.01,
 }
+
+
+def deep_q_network(input_shape, output_shape, lr) -> Sequential:
+    deep = Sequential()
+
+    deep.add(Dense(64, activation="relu", input_dim=input_shape))
+    deep.add(Dense(32, activation="relu"))
+    deep.add(Dense(output_shape, activation="linear"))
+
+    deep.compile(loss="mse", optimizer=Adam(learning_rate=lr))
+
+    return deep
+
+
+def create_actor(input_shape, output_shape, lr) -> Sequential:
+    actor = Sequential()
+    actor.add(Input(input_shape, ))
+    actor.add(Dense(128, activation="relu"))
+    actor.add(Dense(64, activation="relu"))
+    actor.add(Dense(output_shape, activation="Softmax", dtype="float64"))
+    actor.compile(optimizer=Adam(lr), loss="mse")
+
+    return actor
+
+
+def create_critic(input_shape, output_shape, lr) -> Sequential:
+    critic = Sequential()
+    critic.add(tf.keras.Input(shape=(input_shape ,)))
+    critic.add(Dense(128 , activation='relu'))  # Hidden layer.
+    critic.add(Dense(64, activation='relu'))  # Hidden layer.
+    critic.add(Dense(output_shape , activation='linear'))  # Output layer.
+    critic.compile(optimizer=Adam(learning_rate=lr), loss="mse")
+    return critic
+
+
+model = deep_q_network(config["input_size"], config["output_size"], config["alpha"])
 
 
 # will want to initialize model based on saved weights on server start
@@ -23,12 +69,12 @@ def get_article_info(article_id: int):
     return cat_id, source_id
 
 
-def make_recommendation(last_clicks: list):
+def get_inputs(clicks: list):
     inputs = []
-    for click in last_clicks:
+    for click in clicks:
         click_id = click[0]
         art_id = click[1]
-        cat_id, source_id = get_article_info(art_id)
+        cat_id , source_id = get_article_info(art_id)
         # need to get information from articles
         client_id = click[2]
         clicked = click[3]
@@ -39,8 +85,18 @@ def make_recommendation(last_clicks: list):
         else:
             rating = 0
 
-        input_c = (click_id, art_id, cat_id, client_id, clicked, rated, list_number, rating)
+        input_c = (click_id , art_id , cat_id , client_id , clicked , rated , list_number , rating)
         inputs.append(input_c)
+
+    return inputs
+
+
+def make_recommendation(last_clicks: list):
+    inputs = get_inputs(last_clicks)
+    # get values from model
+    action = model.predict(inputs)
+    # will probably need to extract article ids somehow
+    # need to get articles from db and return them
 
 
 def random_articles(n: int):
