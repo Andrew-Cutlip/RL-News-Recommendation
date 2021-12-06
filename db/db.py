@@ -285,7 +285,7 @@ def get_article_by_id(article_id: int):
 def articles_by_ids(article_ids: list):
     articles = []
     for art_id in article_ids:
-        a = art_id[0]
+        a = int(art_id[0])
         article = get_article_by_id(a)
         articles.append(article)
 
