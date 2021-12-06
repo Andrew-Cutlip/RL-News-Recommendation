@@ -53,6 +53,8 @@ def home():
     print("Last clicks")
     print(last_clicks, flush=True)
     rec = recommend.make_recommendation(last_clicks)
+    print(rec)
+    print(len(rec))
     articles = recommend.add_source_names(rec)
 
     client = db.get_client_by_cookie(cookie)

@@ -152,7 +152,7 @@ def random_articles(n: int):
 
 
 def add_source_names(articles: list):
-    print("Adding source names")
+    print("Adding source names", flush=True)
     print(articles)
     for article in articles:
         source_id = article[2]
