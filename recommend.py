@@ -152,7 +152,8 @@ def random_articles(n: int):
 
 
 def add_source_names(articles: list):
-
+    print("Adding source names")
+    print(articles)
     for article in articles:
         source_id = article[2]
         name = db.get_source_name(source_id)
