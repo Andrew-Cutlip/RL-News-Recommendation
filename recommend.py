@@ -116,6 +116,7 @@ def get_best_n_articles(values: list, n: int):
 
 def make_recommendation(last_clicks: list):
     inputs = get_inputs(last_clicks)
+    print(inputs)
     # need to flatten inputs
     inputs = np.array(inputs)
     inputs = inputs.flatten()
