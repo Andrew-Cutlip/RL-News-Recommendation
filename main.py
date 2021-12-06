@@ -2,7 +2,7 @@ import json, secrets, string
 
 import db.db as db
 import state
-import reccomend
+import recommend
 import sys
 import data.insert as insert
 from flask import Flask, render_template, redirect, request, make_response, send_from_directory
@@ -46,10 +46,13 @@ def home():
         last_clicks = []
     arts = 10
     # will want articles chosen by model
-    rand = reccomend.random_articles(arts)
-    articles = reccomend.add_source_names(rand)
-    print("Random articles\n")
+    # rand = recommend.random_articles(arts)
+    # articles = recommend.add_source_names(rand)
+    # print("Random articles\n")
     # print(rand)
+    rec = recommend.make_recommendation(last_clicks)
+    articles = recommend.add_source_names(rec)
+
     client = db.get_client_by_cookie(cookie)
     client_id = client[0]
     # need to add clicks for articles in db
@@ -66,7 +69,7 @@ def home():
         actions.append(article[0])
 
     # add to experience replay
-    reccomend.store_replays(last_clicks, actions, clicks)
+    recommend.store_replays(last_clicks, actions, clicks)
     # make response
     response = make_response(render_template("News.html", articles=articles))
     response.set_cookie("user_id", cookie)
