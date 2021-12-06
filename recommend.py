@@ -157,12 +157,21 @@ def random_articles(n: int):
 def add_source_names(articles: list):
     print("Adding source names", flush=True)
     print(articles)
+    res = []
     for article in articles:
+        art_id = article[0]
+        cat_id = article[1]
         source_id = article[2]
         name = db.get_source_name(source_id)
-        article[2] = name
+        author = article[3]
+        title = article[4]
+        description = article[5]
+        content = article[6]
+        url = article[7]
+        art = (art_id, cat_id, name, author, title, description, content, url)
+        res.append(art)
 
-    return articles
+    return res
 
 
 # save as json file maybe to store for training
