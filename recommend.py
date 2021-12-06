@@ -84,7 +84,7 @@ def get_article_info(article_id: int):
     return cat_id, source_id
 
 
-def get_inputs(clicks: list):
+def get_inputs(clicks: list) -> list:
     inputs = []
     for click in clicks:
         click_id = click[0]
@@ -100,7 +100,7 @@ def get_inputs(clicks: list):
         else:
             rating = 0
 
-        input_c = (click_id, art_id, cat_id, client_id, clicked, rated, list_number, rating)
+        input_c = [click_id, art_id, cat_id, client_id, clicked, rated, list_number, rating]
         inputs.append(input_c)
 
     return inputs
@@ -115,11 +115,11 @@ def get_best_n_articles(values: list, n: int):
 
 
 def make_recommendation(last_clicks: list):
-    inputs = get_inputs(last_clicks)
+    inputs: list = get_inputs(last_clicks)
     print(inputs)
     # need to flatten inputs
-    inputs = np.array(inputs)
-    inputs = inputs.flatten()
+    inputs: np.ndarray = np.array(inputs)
+    inputs: np.ndarray = inputs.flatten()
     # get values from model
     # action_vals = model.predict(inputs)
     action_vals = actor.predict(inputs)
