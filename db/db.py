@@ -83,7 +83,7 @@ tables = [
     """
     CREATE TABLE IF NOT EXISTS experiences (
         experience_id SERIAL PRIMARY KEY NOT NULL,
-        last_clicks INTEGER[] NOT NULL,
+        last_clicks record NOT NULL,
         actions INTEGER[] NOT NULL,
         recommendation INTEGER[] NOT NULL
     );
@@ -113,6 +113,16 @@ def drop_articles():
 def drop_clicks():
     sql = """
         DROP TABLE clicks CASCADE;
+    """
+
+    cur.execute(sql)
+
+    conn.commit()
+
+
+def drop_experiences():
+    sql = """
+        DROP TABLE experiences CASCADE;
     """
 
     cur.execute(sql)
