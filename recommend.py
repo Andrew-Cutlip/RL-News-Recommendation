@@ -89,7 +89,7 @@ def get_inputs(clicks: list) -> list:
     for click in clicks:
         click_id = click[0]
         art_id = click[1]
-        cat_id , source_id = get_article_info(art_id)
+        cat_id, source_id = get_article_info(art_id)
         # need to get information from articles
         client_id = click[2]
         clicked = click[3]
@@ -183,11 +183,13 @@ def store_replays(last_clicks,  actions: list, results: list):
         data = json.load(file)
         if data is not None:
             s1_list = data["s1"]
+            print(last_clicks)
             s1_list.append(last_clicks)
             s2_list = data["s2"]
+            print(results)
             s2_list.append(results)
             a_list = data["a"]
-            actions = actions
+            print(actions)
             a_list.append(actions)
         else:
             s1_list = [last_clicks]
