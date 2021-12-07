@@ -38,6 +38,7 @@ def home():
         # need to add to client db
         is_user = False
         client = {
+            "user_id": -1,
             "is_user": is_user,
             "cookie": cookie
         }
