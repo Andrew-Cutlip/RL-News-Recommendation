@@ -188,7 +188,7 @@ def store_replays(last_clicks,  actions: list, results: list):
             s1_list.append(last_clicks)
             s2_list = data["s2"]
             print(results, flush=True)
-            print(type(results, flush=True))
+            print(type(results), flush=True)
             s2_list.append(results)
             a_list = data["a"]
             print(actions, flush=True)
