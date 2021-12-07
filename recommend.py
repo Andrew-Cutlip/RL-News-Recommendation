@@ -157,8 +157,8 @@ def random_articles(n: int):
 
 
 def add_source_names(articles: list):
-    print("Adding source names", flush=True)
-    print(articles)
+    # print("Adding source names", flush=True)
+    # print(articles)
     res = []
     for article in articles:
         art_id = article[0]
@@ -184,27 +184,27 @@ def store_replays(last_clicks,  actions: list, results: list):
         data = json.load(file)
         if data is not None:
             s1_list = data["s1"]
-            print(last_clicks, flush=True)
-            print(type(last_clicks) , flush=True)
+            # print(last_clicks, flush=True)
+            # print(type(last_clicks) , flush=True)
             s1_list.append(last_clicks)
             s2_list = data["s2"]
-            print(results, flush=True)
-            print(type(results), flush=True)
+            # print(results, flush=True)
+            # print(type(results), flush=True)
             s2_list.append(results)
             a_list = data["a"]
-            print(actions, flush=True)
-            print(type(actions), flush=True)
+            # print(actions, flush=True)
+            # print(type(actions), flush=True)
             a_list.append(actions)
         else:
             s1_list = [last_clicks]
-            print(last_clicks , flush=True)
-            print(type(last_clicks) , flush=True)
+            # print(last_clicks , flush=True)
+            # print(type(last_clicks) , flush=True)
             s2_list = [results]
-            print(results , flush=True)
-            print(type(results , flush=True))
+            # print(results , flush=True)
+            # print(type(results , flush=True))
             a_list = [actions]
-            print(actions , flush=True)
-            print(type(actions) , flush=True)
+            # print(actions , flush=True)
+            # print(type(actions) , flush=True)
 
         new_data = {"s1": s1_list, "a": a_list, "s2": s2_list}
         new_data_json = json.dumps(new_data)

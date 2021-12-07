@@ -56,7 +56,8 @@ def home():
     print(rec)
     print(len(rec))
     articles = recommend.add_source_names(rec)
-
+    print(articles)
+    print(len(articles))
     client = db.get_client_by_cookie(cookie)
     client_id = client[0]
     # need to add clicks for articles in db
