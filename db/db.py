@@ -293,8 +293,8 @@ def articles_by_ids(article_ids: list):
         article = get_article_by_id(a)
         articles.append(article)
 
-    print("Articles")
-    print(articles)
+    # print("Articles")
+    # print(articles)
     return articles
 
 
