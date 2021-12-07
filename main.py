@@ -56,11 +56,11 @@ def home():
     # recommend.train_model()
     rec, rec_ids, action_vals = recommend.make_recommendation(last_clicks)
     # print(rec)
-    print("Number of reccomended articles\n", flush=True)
+    print("Number of recommended articles\n", flush=True)
     print(len(rec), flush=True)
     articles = recommend.add_source_names(rec)
     # print(articles)
-    print(len(articles))
+    print(len(articles), flush=True)
     client = db.get_client_by_cookie(cookie)
     client_id = client[0]
     # need to add clicks for articles in db

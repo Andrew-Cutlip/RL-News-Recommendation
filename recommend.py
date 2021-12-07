@@ -138,6 +138,7 @@ def make_recommendation(last_clicks: list):
     # get values from model
     # action_vals = model.predict(inputs)
     action_vals = actor.predict(inputs)
+    action_vals = action_vals.tolist()
     # will probably need to extract article ids somehow
     best_article_ids = get_best_n_articles(action_vals, config["recommendation_size"])
     # print("Best article ids\n", flush=True)
@@ -149,7 +150,6 @@ def make_recommendation(last_clicks: list):
     # print("Best articles\n", flush=True)
     # print(best_articles)
     # best_article_ids = [a_id for a_id in best_article_ids]
-    action_vals = action_vals.tolist()
 
     return best_articles, best_article_ids, action_vals
 
