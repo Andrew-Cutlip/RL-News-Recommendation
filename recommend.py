@@ -229,7 +229,7 @@ def store_replays(last_clicks,  actions: list, results: list):
 def train_model():
     # filename = "replays.json"
     # with open(filename, "r") as file:
-        # replays = json.load(file)
+    # replays = json.load(file)
     replays = db.get_all_experiences()
     replay_buffer = [(s1, a, s2) for s1, a, s2 in zip(replays["s1"], replays["a"], replays["s2"])]
     buff = np.array(replay_buffer)

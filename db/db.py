@@ -85,7 +85,7 @@ tables = [
         experience_id SERIAL PRIMARY KEY NOT NULL,
         last_clicks INTEGER[] NOT NULL,
         actions INTEGER[] NOT NULL,
-        recommendation INTEGER[] NOT NULL,
+        recommendation INTEGER[] NOT NULL
     );
     """,
 ]
