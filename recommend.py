@@ -230,6 +230,7 @@ def train_model():
     episodes = config["num_episodes"]
     batch_size = config["batch_size"]
     all_rewards = []
+    actor_losses = []
     if len(replay_buffer) > batch_size:
         for e in range(episodes):
             # sample replay buffer
@@ -263,6 +264,7 @@ def train_model():
                 critic.fit(values, advantages)
 
                 loss = actor_loss(advantages, all_probs)
+                actor_losses.append(loss)
                 print(loss)
 
                 # need to update actor weights too
@@ -272,4 +274,4 @@ def train_model():
 
                 all_rewards.append(rewards)
 
-    return all_rewards
+    return all_rewards, actor_losses
