@@ -16,7 +16,7 @@ def get_last_n_click(n: int, clicks: list) -> list:
         print("Clicks", flush=True)
         print(clicks, flush=True)
         if len(clicks) > 0:
-            ret = clicks + random.tolist()
+            ret = np.concatenate((clicks, random))
         else:
             ret = random.tolist()
         return ret
