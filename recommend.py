@@ -110,7 +110,8 @@ def get_inputs(clicks: list) -> list:
 
 def get_best_n_articles(values, n: int):
     # get indices of n largest values
-    print(values)
+    print("Values\n")
+    print(values, flush=True)
     part = np.argpartition(- values, n)
     indices = part[:n]
     # indices = index[np.argsort((- values)[index])]
@@ -140,6 +141,7 @@ def make_recommendation(last_clicks: list):
     # will probably need to extract article ids somehow
     best_article_ids = get_best_n_articles(action_vals, config["recommendation_size"])
     # print("Best article ids\n", flush=True)
+    print("Best article ids\n")
     print(best_article_ids, flush=True)
     print(len(best_article_ids), flush=True)
     # need to get articles from db and return them
