@@ -285,10 +285,14 @@ def get_article_by_id(article_id: int):
 def articles_by_ids(article_ids: list):
     articles = []
     for art_id in article_ids:
+        print("Article_id")
         a = int(art_id[0])
+        print(a)
         article = get_article_by_id(a)
         articles.append(article)
 
+    print("Articles")
+    print(articles)
     return articles
 
 

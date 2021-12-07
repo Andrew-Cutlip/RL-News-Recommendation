@@ -118,29 +118,29 @@ def get_best_n_articles(values: list, n: int):
 
 def make_recommendation(last_clicks: list):
     # will want to load model here if available
-    print(last_clicks, flush=True)
+    # print(last_clicks, flush=True)
     inputs: list = get_inputs(last_clicks)
-    print(inputs, flush=True)
+    # print(inputs, flush=True)
     # need to flatten inputs
     inputs: np.ndarray = np.array(inputs)
-    print(inputs.shape, flush=True)
+    # print(inputs.shape, flush=True)
     inputs: np.ndarray = inputs.flatten()
-    print(inputs, flush=True)
-    print(inputs.shape, flush=True)
+    # print(inputs, flush=True)
+    # print(inputs.shape, flush=True)
     inputs = inputs.reshape((-1, inputs.shape[0]))
-    print(inputs, flush=True)
+    # print(inputs, flush=True)
     inputs = tf.constant(inputs)
     # get values from model
     # action_vals = model.predict(inputs)
     action_vals = actor.predict(inputs)
     # will probably need to extract article ids somehow
     best_article_ids = get_best_n_articles(action_vals, config["recommendation_size"])
-    print("Best article ids\n", flush=True)
-    print(best_article_ids, flush=True)
+    # print("Best article ids\n", flush=True)
+    # print(best_article_ids, flush=True)
     # need to get articles from db and return them
     best_articles = db.articles_by_ids(best_article_ids)
-    print("Best articles\n", flush=True)
-    print(best_articles)
+    # print("Best articles\n", flush=True)
+    # print(best_articles)
     best_article_ids = [a_id for a_id in best_article_ids]
     action_vals = action_vals.tolist()
 

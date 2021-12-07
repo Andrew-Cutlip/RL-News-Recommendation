@@ -23,7 +23,7 @@ def home():
     if "user_id" in cookies:
         cookie = cookies["user_id"]
         client = db.get_client_by_cookie(cookie)
-        print(client)
+        # print(client)
         client_id = client[0]
         is_user = client[2]
         num_clicks = 10
@@ -50,8 +50,8 @@ def home():
     # articles = recommend.add_source_names(rand)
     # print("Random articles\n")
     # print(rand)
-    print("Last clicks")
-    print(last_clicks, flush=True)
+    # print("Last clicks")
+    # print(last_clicks, flush=True)
     rec, rec_ids, action_vals = recommend.make_recommendation(last_clicks)
     print(rec)
     print(len(rec))
