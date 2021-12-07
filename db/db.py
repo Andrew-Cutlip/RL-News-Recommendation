@@ -425,7 +425,7 @@ def get_all_clicks():
 def insert_experience(experience: tuple):
     sql = """
         INSERT INTO experiences (last_clicks, actions, recommendation)
-        VALUES ( { %s }, { %s }, { %s })
+        VALUES ( (%s) , (%s) ,  (%s) )
     """
 
     cur.execute(sql, experience)
