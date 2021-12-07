@@ -286,7 +286,7 @@ def articles_by_ids(article_ids: list):
     print("Articles ids", flush=True)
     print(article_ids, flush=True)
     articles = []
-    for art_id in article_ids[0]:
+    for art_id in article_ids:
         # print("Article_id")
         a = int(art_id)
         # print(a)
