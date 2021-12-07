@@ -110,7 +110,8 @@ def get_inputs(clicks: list) -> list:
 
 def get_best_n_articles(values, n: int):
     # get indices of n largest values
-    print("Values\n")
+    print("Values")
+    values = np.array(values[0])
     print(values, flush=True)
     part = np.argpartition(- values, n)
     indices = part[:n]
