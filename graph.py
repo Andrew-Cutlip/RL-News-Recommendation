@@ -7,5 +7,5 @@ def plot_rewards(rewards: list, test: str):
     plt.ylabel("Reward")
     plt.xlabel("Episodes")
     plt.title(f"Reward per Experience for {test}")
-    plt.savefig(f"./Reward{test}.png")
+    plt.savefig(f"./static/Reward{test}.png")
     plt.show()
