@@ -229,8 +229,8 @@ def train_model():
     buff = np.array(replay_buffer)
     episodes = config["num_episodes"]
     batch_size = config["batch_size"]
+    all_rewards = []
     if len(replay_buffer) > batch_size:
-        all_rewards = []
         for e in range(episodes):
             # sample replay buffer
             indices = np.random.choice(len(replay_buffer), batch_size, replace=False)

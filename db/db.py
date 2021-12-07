@@ -391,5 +391,18 @@ def get_all_articles():
     return articles
 
 
+def get_all_clicks():
+    sql = """
+        SELECT * FROM clicks
+    """
+
+    cur.execute(sql)
+    clicks = []
+    c = cur.fetchall()
+    for click in c:
+        clicks.append(click)
+    return clicks
+
+
 if __name__ == "__main__":
     pass
