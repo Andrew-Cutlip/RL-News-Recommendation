@@ -45,6 +45,7 @@ def home():
         db.insert_client(client)
         # need to get clicks for starting state
         last_clicks = []
+        last_clicks = state.get_last_n_click(10, last_clicks)
     arts = 10
     # will want articles chosen by model
     # rand = recommend.random_articles(arts)
