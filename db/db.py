@@ -83,7 +83,7 @@ tables = [
     """
     CREATE TABLE IF NOT EXISTS experiences (
         experience_id SERIAL PRIMARY KEY NOT NULL,
-        last_clicks INTEGER[] NOT NULL,
+        last_clicks INTEGER[][] NOT NULL,
         actions INTEGER[] NOT NULL,
         recommendation INTEGER[] NOT NULL
     );
