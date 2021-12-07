@@ -80,9 +80,14 @@ def home():
         clicks.append(click_id)
         actions.append(article[0])
 
+    # get just click ids
+    last_ids = []
+    for click in last_clicks:
+        last_ids.append(click[0])
+
     # add to experience replay
     # recommend.store_replays(last_clicks, action_vals, clicks)
-    recommend.store_replays_in_db(last_clicks, action_vals, clicks)
+    recommend.store_replays_in_db(last_ids, action_vals, clicks)
     # make response
     response = make_response(render_template("News.html", articles=articles))
     response.set_cookie("user_id", cookie)

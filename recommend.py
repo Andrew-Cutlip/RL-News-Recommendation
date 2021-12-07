@@ -248,9 +248,16 @@ def train_model():
                 advantages = tf.zeros(batch_size)
                 rewards = tf.zeros(batch_size)
                 for i, sample in enumerate(batch):
-                    client_id = sample[0][2]
+                    click_ids = sample[0]
+                    # need to get click from click_id
+                    clicks = []
+                    for c_id in click_ids:
+                        click = db.get_click_by_id(c_id)
+                        clicks.append(click)
+
+                    client_id = clicks[0][2]
                     recommend = sample[2]
-                    state = sample[0]
+                    state = get_inputs(clicks)
                     value = critic.predict(state)
                     values[i] = value
                     next_value = critic.predict(recommend)
