@@ -53,7 +53,7 @@ def home():
     # print("Last clicks")
     # print(last_clicks, flush=True)
     # add training of model
-    # recommend.train_model()
+    recommend.train_model()
     rec, rec_ids, action_vals = recommend.make_recommendation(last_clicks)
     # print(rec)
     print("Number of recommended articles\n", flush=True)
