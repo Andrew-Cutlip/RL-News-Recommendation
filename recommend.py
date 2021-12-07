@@ -188,6 +188,7 @@ def add_source_names(articles: list):
 def store_replays_in_db(last_clicks, actions, results):
     experience = (last_clicks, actions, results)
     db.insert_experience(experience)
+    print("Inserted experience in db")
 
 
 # save as json file maybe to store for training
@@ -290,5 +291,5 @@ def train_model():
     else:
         print("Batch size too small at")
         print(len(replay_buffer))
-        
+
     return all_rewards, actor_losses

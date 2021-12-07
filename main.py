@@ -195,7 +195,7 @@ if __name__ == '__main__':
     # db.drop_articles()
     # need to drop click for new format
     # db.drop_clicks()
-    db.drop_experiences()
+    # db.drop_experiences()
     db.create_tables(db.tables)
     # add stuff to db.
     prefix = "data/"
