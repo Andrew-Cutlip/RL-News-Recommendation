@@ -122,7 +122,7 @@ def drop_clicks():
 
 def drop_experiences():
     sql = """
-        DROP TABLE experiences CASCADE;
+        DROP TABLE IF EXISTS experiences CASCADE;
     """
 
     cur.execute(sql)
