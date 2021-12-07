@@ -142,7 +142,7 @@ def make_recommendation(last_clicks: list):
     print("Best articles\n", flush=True)
     print(best_articles)
     best_article_ids = [a_id for a_id in best_article_ids]
-    action_vals = action_vals.toList()
+    action_vals = action_vals.tolist()
 
     return best_articles, best_article_ids, action_vals
 
