@@ -223,46 +223,47 @@ def train_model():
     buff = np.array(replay_buffer)
     episodes = config["num_episodes"]
     batch_size = config["batch_size"]
-    all_rewards = []
-    for e in range(episodes):
-        # sample replay buffer
-        indices = np.random.choice(len(replay_buffer), batch_size, replace=False)
-        batch = buff[indices]
-        with tf.GradientTape() as tape:
-            values = tf.zeros(batch_size)
-            all_probs = tf.zeros(batch_size)
-            advantages = tf.zeros(batch_size)
-            rewards = tf.zeros(batch_size)
-            for i, sample in enumerate(batch):
-                client_id = sample[0][2]
-                recommend = sample[2]
-                state = sample[0]
-                value = critic.predict(state)
-                values[i] = value
-                next_value = critic.predict(recommend)
-                # need to get actual clicks from click_ids
-                reward_val = reward.calculate_reward(client_id, recommend)
-                print(reward_val)
-                rewards[i] = reward_val
-                target = reward_val + config["gamma"] * next_value
-                advantage = target - value
-                advantages[i] = advantage
+    if len(replay_buffer) > batch_size:
+        all_rewards = []
+        for e in range(episodes):
+            # sample replay buffer
+            indices = np.random.choice(len(replay_buffer), batch_size, replace=False)
+            batch = buff[indices]
+            with tf.GradientTape() as tape:
+                values = tf.zeros(batch_size)
+                all_probs = tf.zeros(batch_size)
+                advantages = tf.zeros(batch_size)
+                rewards = tf.zeros(batch_size)
+                for i, sample in enumerate(batch):
+                    client_id = sample[0][2]
+                    recommend = sample[2]
+                    state = sample[0]
+                    value = critic.predict(state)
+                    values[i] = value
+                    next_value = critic.predict(recommend)
+                    # need to get actual clicks from click_ids
+                    reward_val = reward.calculate_reward(client_id, recommend)
+                    print(reward_val)
+                    rewards[i] = reward_val
+                    target = reward_val + config["gamma"] * next_value
+                    advantage = target - value
+                    advantages[i] = advantage
 
-                probs = sample[1]
+                    probs = sample[1]
 
-                log_probs = tf.math.log(probs)
-                all_probs[i] = log_probs
+                    log_probs = tf.math.log(probs)
+                    all_probs[i] = log_probs
 
-            critic.fit(values, advantages)
+                critic.fit(values, advantages)
 
-            loss = actor_loss(advantages, all_probs)
-            print(loss)
+                loss = actor_loss(advantages, all_probs)
+                print(loss)
 
-            # need to update actor weights too
-            a_vars = actor.trainable_variables
-            a_grad = tape.gradient(loss, a_vars)
-            optimizer.apply_gradients(zip(a_grad, a_vars))
+                # need to update actor weights too
+                a_vars = actor.trainable_variables
+                a_grad = tape.gradient(loss, a_vars)
+                optimizer.apply_gradients(zip(a_grad, a_vars))
 
-            all_rewards.append(rewards)
+                all_rewards.append(rewards)
 
     return all_rewards

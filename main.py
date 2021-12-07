@@ -55,10 +55,10 @@ def home():
     # add training of model
     # recommend.train_model()
     rec, rec_ids, action_vals = recommend.make_recommendation(last_clicks)
-    print(rec)
+    # print(rec)
     print(len(rec))
     articles = recommend.add_source_names(rec)
-    print(articles)
+    # print(articles)
     print(len(articles))
     client = db.get_client_by_cookie(cookie)
     client_id = client[0]
