@@ -1,5 +1,5 @@
 import json, secrets, string
-
+import graph
 import db.db as db
 import state
 import recommend
@@ -54,8 +54,11 @@ def home():
     # print(last_clicks, flush=True)
     # add training of model
     rewards, actor_losses = recommend.train_model()
+    test = "ActorCritic"
     print("Rewards")
     print(rewards)
+    # plot rewards
+    graph.plot_rewards(rewards, test)
     print("Actor Losses")
     print(actor_losses)
     rec, rec_ids, action_vals = recommend.make_recommendation(last_clicks)
