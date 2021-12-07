@@ -112,7 +112,7 @@ def get_best_n_articles(values, n: int):
     # get indices of n largest values
     print(values)
     part = np.argpartition(- values, n)
-    indices = part[:4]
+    indices = part[:n]
     # indices = index[np.argsort((- values)[index])]
     # indices = values.argsort()[- n:][:: -1]
 
