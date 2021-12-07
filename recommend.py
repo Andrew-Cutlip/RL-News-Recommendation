@@ -287,4 +287,8 @@ def train_model():
 
                 all_rewards.append(rewards)
 
+    else:
+        print("Batch size too small at")
+        print(len(replay_buffer))
+        
     return all_rewards, actor_losses
