@@ -283,8 +283,8 @@ def get_article_by_id(article_id: int):
 
 
 def articles_by_ids(article_ids: list):
-    print("Articles ids")
-    print(article_ids)
+    print("Articles ids", flush=True)
+    print(article_ids, flush=True)
     articles = []
     for art_id in article_ids[0]:
         # print("Article_id")
