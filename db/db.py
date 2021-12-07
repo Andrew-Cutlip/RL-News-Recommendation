@@ -79,7 +79,15 @@ tables = [
             REFERENCES clients (client_id)
             ON UPDATE CASCADE ON DELETE CASCADE
     );
+    """,
     """
+    CREATE TABLE IF NOT EXISTS experiences (
+        experience_id SERIAL PRIMARY KEY NOT NULL,
+        last_clicks INTEGER[] NOT NULL,
+        actions INTEGER[] NOT NULL,
+        recommendation INTEGER[] NOT NULL,
+    );
+    """,
 ]
 
 
@@ -402,6 +410,30 @@ def get_all_clicks():
     for click in c:
         clicks.append(click)
     return clicks
+
+
+def insert_experience(experience: tuple):
+    sql = """
+        INSERT INTO experiences (last_clicks, actions, recommendation)
+        VALUES (%s, %s, %s)
+    """
+
+    cur.execute(sql, experience)
+
+
+def get_all_experiences():
+    sql = """
+        SELECT * FROM experiences
+    """
+
+    cur.execute(sql)
+
+    e = cur.fetchall()
+    experiences = []
+    for experience in e:
+        experiences.append(experience)
+
+    return experiences
 
 
 if __name__ == "__main__":
