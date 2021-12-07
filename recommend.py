@@ -141,6 +141,7 @@ def make_recommendation(last_clicks: list):
     best_articles = db.articles_by_ids(best_article_ids)
     print("Best articles\n", flush=True)
     print(best_articles)
+    best_articles_ids = [a_id for a_id in best_article_ids]
 
     return best_articles, best_article_ids, action_vals
 
@@ -182,7 +183,6 @@ def store_replays(last_clicks,  actions: list, results: list):
         data = json.load(file)
         if data is not None:
             s1_list = data["s1"]
-            s1_list = s1_list.toList()
             s1_list.append(last_clicks)
             s2_list = data["s2"]
             s2_list.append(results)
