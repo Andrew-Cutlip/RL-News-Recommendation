@@ -141,7 +141,7 @@ def make_recommendation(last_clicks: list):
     best_articles = db.articles_by_ids(best_article_ids)
     print("Best articles\n", flush=True)
     print(best_articles)
-    best_articles_ids = [a_id for a_id in best_article_ids]
+    best_article_ids = [a_id for a_id in best_article_ids]
 
     return best_articles, best_article_ids, action_vals
 
