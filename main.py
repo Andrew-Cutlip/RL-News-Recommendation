@@ -81,7 +81,8 @@ def home():
         actions.append(article[0])
 
     # add to experience replay
-    recommend.store_replays(last_clicks, action_vals, clicks)
+    # recommend.store_replays(last_clicks, action_vals, clicks)
+    recommend.store_replays_in_db(last_clicks, action_vals, clicks)
     # make response
     response = make_response(render_template("News.html", articles=articles))
     response.set_cookie("user_id", cookie)
