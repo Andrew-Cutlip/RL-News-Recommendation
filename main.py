@@ -52,6 +52,8 @@ def home():
     # print(rand)
     # print("Last clicks")
     # print(last_clicks, flush=True)
+    # add training of model
+    # recommend.train_model()
     rec, rec_ids, action_vals = recommend.make_recommendation(last_clicks)
     print(rec)
     print(len(rec))
