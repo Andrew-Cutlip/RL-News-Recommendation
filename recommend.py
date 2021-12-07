@@ -14,7 +14,7 @@ import typing
 total_num_articles = 3757
 config = {
     "num_episodes": 500,
-    "batch_size": 256,
+    "batch_size": 32,
     "input_size": 80,
     "output_size": total_num_articles,
     "alpha": 0.01,
