@@ -110,8 +110,10 @@ def get_inputs(clicks: list) -> list:
 
 def get_best_n_articles(values, n: int):
     # get indices of n largest values
-    index = np.argpartition(values, - n)[- n:]
-    indices = index[np.argsort((- values)[index])]
+    print(values)
+    part = np.argpartition(- values, n)
+    indices = part[:4]
+    # indices = index[np.argsort((- values)[index])]
     # indices = values.argsort()[- n:][:: -1]
 
     # these will be the article ids
