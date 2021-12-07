@@ -14,5 +14,5 @@ def get_last_n_click(n: int, clicks: list) -> list:
         return ret
 
     else:
-        last_clicks: list = clicks[0:n]
+        last_clicks: list = clicks[-n:]
         return last_clicks
