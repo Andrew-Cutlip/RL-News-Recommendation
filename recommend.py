@@ -111,7 +111,7 @@ def get_inputs(clicks: list) -> list:
 def get_best_n_articles(values, n: int):
     # get indices of n largest values
     print("Values")
-    values = np.array(values[0])
+    values = np.array(values)
     print(values, flush=True)
     part = np.argpartition(- values, n)
     indices = part[:n]
@@ -139,7 +139,7 @@ def make_recommendation(last_clicks: list):
     # get values from model
     # action_vals = model.predict(inputs)
     action_vals = actor.predict(inputs)
-    action_vals = action_vals.tolist()
+    action_vals = action_vals.tolist()[0]
     # will probably need to extract article ids somehow
     best_article_ids = get_best_n_articles(action_vals, config["recommendation_size"])
     # print("Best article ids\n", flush=True)
