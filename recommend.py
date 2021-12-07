@@ -176,17 +176,18 @@ def add_source_names(articles: list):
 
 # save as json file maybe to store for training
 # calculate reward later
-def store_replays(last_clicks: list,  actions, results: list):
+def store_replays(last_clicks,  actions: list, results: list):
     filename = "replays.json"
     with open(filename, "r") as file:
         data = json.load(file)
         if data is not None:
             s1_list = data["s1"]
+            s1_list = s1_list.toList()
             s1_list.append(last_clicks)
             s2_list = data["s2"]
             s2_list.append(results)
             a_list = data["a"]
-            actions = actions.toList()
+            actions = actions
             a_list.append(actions)
         else:
             s1_list = [last_clicks]
