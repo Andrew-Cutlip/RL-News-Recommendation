@@ -55,6 +55,14 @@ def actor_loss(advantages, actions):
     return loss
 
 
+huber_loss = tf.keras.losses.MSE
+
+
+def critic_loss(advantages, values):
+    loss = huber_loss(advantages, values)
+    return loss
+
+
 def create_critic(input_shape, output_shape, lr) -> Sequential:
     critic = Sequential()
     critic.add(tf.keras.Input(shape=(input_shape ,)))
@@ -238,12 +246,13 @@ def train_model():
     batch_size = config["batch_size"]
     all_rewards = []
     actor_losses = []
+    critic_losses = []
     if len(replay_buffer) > batch_size:
         for e in range(episodes):
             # sample replay buffer
             indices = np.random.choice(len(replay_buffer), batch_size, replace=False)
             batch = buff[indices]
-            with tf.GradientTape() as tape:
+            with tf.GradientTape(persistent=True) as tape:
                 values = tf.TensorArray(dtype=tf.float32, size=0, dynamic_size=True)
                 all_probs = tf.TensorArray(dtype=tf.float32, size=0, dynamic_size=True)
                 advantages = tf.TensorArray(dtype=tf.float32, size=0, dynamic_size=True)
@@ -310,16 +319,22 @@ def train_model():
                 all_probs = tf.reshape(all_probs, [all_probs.shape[0], -1])
                 advantages = advantages.stack()
                 advantages = tf.reshape(advantages, [advantages.shape[0], -1])
-                critic.fit(values, advantages)
 
-                loss = actor_loss(advantages, all_probs)
-                actor_losses.append(loss)
-                print(loss)
+                c_loss = critic_loss(advantages, values)
+                critic_losses.append(c_loss)
+                print(c_loss)
+
+                a_loss = actor_loss(advantages, all_probs)
+                actor_losses.append(a_loss)
+                print(a_loss)
 
                 # need to update actor weights too
                 a_vars = actor.trainable_variables
-                a_grad = tape.gradient(loss, a_vars)
+                c_vars = critic.trainable_variables
+                a_grad = tape.gradient(a_loss, a_vars)
+                c_grad = tape.gradient(c_loss, c_vars)
                 optimizer.apply_gradients(zip(a_grad, a_vars))
+                optimizer.apply_gradients(zip(c_grad, c_vars))
 
                 all_rewards.append(rewards)
 
