@@ -256,7 +256,7 @@ def train_model():
                 values = tf.TensorArray(dtype=tf.float32, size=0, dynamic_size=True)
                 all_probs = tf.TensorArray(dtype=tf.float32, size=0, dynamic_size=True)
                 advantages = tf.TensorArray(dtype=tf.float32, size=0, dynamic_size=True)
-                rewards = tf.TensorArray(dtype=tf.int32, size=0, dynamic_size=True)
+                rewards = tf.TensorArray(dtype=tf.float32, size=0, dynamic_size=True)
                 for i, sample in enumerate(batch):
                     print("Sample", flush=True)
                     print(sample, flush=True)
@@ -300,11 +300,11 @@ def train_model():
                     # need to get actual clicks from click_ids
                     reward_val = reward.calculate_reward(client_id, recs)
                     print(reward_val)
-                    reward_val = tf.constant(reward_val)
+                    reward_val = tf.constant(reward_val, dtype=tf.float32)
                     rewards = rewards.write(i, reward_val)
                     gamma = config["gamma"]
-                    # gamma = tf.constant(gamma)
-                    target = reward_val + gamma * next_value
+                    gamma = tf.constant(gamma, dtype=tf.float32)
+                    target = reward_val + (gamma * next_value)
                     advantage = target - value
                     advantages = advantages.write(i, advantage)
 
