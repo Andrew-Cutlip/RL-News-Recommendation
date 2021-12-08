@@ -256,7 +256,7 @@ def train_model():
                 values = tf.TensorArray(dtype=tf.float32, size=0, dynamic_size=True)
                 all_probs = tf.TensorArray(dtype=tf.float32, size=0, dynamic_size=True)
                 advantages = tf.TensorArray(dtype=tf.float32, size=0, dynamic_size=True)
-                rewards = tf.TensorArray(dtype=tf.float32, size=0, dynamic_size=True)
+                rewards = tf.TensorArray(dtype=tf.int32, size=0, dynamic_size=True)
                 for i, sample in enumerate(batch):
                     print("Sample", flush=True)
                     print(sample, flush=True)
