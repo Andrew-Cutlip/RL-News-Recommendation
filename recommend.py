@@ -249,9 +249,13 @@ def train_model():
                 advantages = tf.zeros(batch_size)
                 rewards = tf.zeros(batch_size)
                 for i, sample in enumerate(batch):
+                    print("Sample")
+                    print(sample)
                     click_ids = sample[0]
                     # need to get click from click_id
                     clicks = []
+                    print("click_ids")
+                    print(click_ids)
                     for c_id in click_ids:
                         click = db.get_click_by_id(c_id)
                         clicks.append(click)
