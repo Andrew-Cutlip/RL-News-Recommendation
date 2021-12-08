@@ -266,7 +266,11 @@ def train_model():
                     value = critic.predict(state)
                     values[i] = value
                     # need to get input for recommendation
-                    next_state = get_inputs(recommend)
+                    recs = []
+                    for r_id in recommend:
+                        rec = db.get_click_by_id(r_id)
+                        recs.append(rec)
+                    next_state = get_inputs(recs)
                     next_value = critic.predict(next_state)
                     # need to get actual clicks from click_ids
                     reward_val = reward.calculate_reward(client_id, recommend)
