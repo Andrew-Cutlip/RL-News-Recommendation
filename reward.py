@@ -9,7 +9,7 @@ def calculate_reward(user_id: int , recommended: list):
         position_weights.insert(0, weight)
         weight += 1
     for article in recommended:
-        position = article[5]
+        position = article[6]
         pos_weight = position_weights[position]
         # if clicked on
         if article[3]:
@@ -17,9 +17,9 @@ def calculate_reward(user_id: int , recommended: list):
         else:
             reward -= 1 * pos_weight
         # check if rated
-        rated = article[5]
+        rated = article[4]
         if rated:
-            rating = article[7]
+            rating = article[6]
             if rating == 5:
                 reward += 10 * pos_weight
             elif rating == 4:
