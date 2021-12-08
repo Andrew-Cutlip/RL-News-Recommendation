@@ -287,7 +287,7 @@ def train_model():
                     print("NextState", flush=True)
                     print(next_value, flush=True)
                     # need to get actual clicks from click_ids
-                    reward_val = reward.calculate_reward(client_id, recommend)
+                    reward_val = reward.calculate_reward(client_id, recs)
                     print(reward_val)
                     rewards = rewards.write(i, reward_val)
                     target = reward_val + config["gamma"] * next_value
