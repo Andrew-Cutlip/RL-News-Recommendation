@@ -285,7 +285,7 @@ def train_model():
                     next_state = next_state.reshape((-1, next_state.shape[0]))
                     next_value = critic.predict(next_state)
                     print("NextState", flush=True)
-                    print(next_value, flush=True)
+                    print(next_state, flush=True)
                     # need to get actual clicks from click_ids
                     reward_val = reward.calculate_reward(client_id, recs)
                     print(reward_val)
@@ -294,9 +294,12 @@ def train_model():
                     advantage = target - value
                     advantages = advantages.write(i, advantage)
 
-                    probs = sample[2]
+                    # get probabilities from actor instead maybe?
+                    # probs = sample[2]
+                    probs = actor.predict(state)
+                    clipped = k.clip(probs)
 
-                    log_probs = tf.math.log(probs)
+                    log_probs = tf.math.log(clipped)
                     all_probs = all_probs.write(log_probs)
 
                 critic.fit(values, advantages)
