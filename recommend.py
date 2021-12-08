@@ -297,11 +297,19 @@ def train_model():
                     # get probabilities from actor instead maybe?
                     # probs = sample[2]
                     probs = actor.predict(state)
-                    clipped = k.clip(probs)
+                    clipped = k.clip(probs, 1e-8, 1 - 1e-8)
 
                     log_probs = tf.math.log(clipped)
                     all_probs = all_probs.write(log_probs)
 
+                rewards = rewards.stack()
+                rewards = tf.reshape(rewards, [rewards.shape[0], -1])
+                values = values.stack()
+                values = tf.reshape(values, [values.shape[0], -1])
+                all_probs = all_probs.stack()
+                all_probs = tf.reshape(all_probs, [all_probs.shape[0], -1])
+                advantages = advantages.stack()
+                advantages = tf.reshape(advantages, [advantages.shape[0], -1])
                 critic.fit(values, advantages)
 
                 loss = actor_loss(advantages, all_probs)
