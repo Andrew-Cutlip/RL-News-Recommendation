@@ -71,7 +71,7 @@ def home():
     # plot rewards
     graph.plot_rewards(rewards, test)
     print("Actor Losses")
-    print(actor_losses)
+    #print(actor_losses)
     rec, rec_ids, action_vals = recommend.make_recommendation(last_clicks)
     # print(rec)
     print("Number of recommended articles\n", flush=True)
