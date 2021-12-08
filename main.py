@@ -4,6 +4,7 @@ import db.db as db
 import state
 import recommend
 import sys
+import reward
 import data.insert as insert
 from flask import Flask, render_template, redirect, request, make_response, send_from_directory
 
@@ -55,7 +56,15 @@ def home():
     # print("Last clicks")
     # print(last_clicks, flush=True)
     # add training of model
-    rewards, actor_losses, crtic_losses = recommend.train_model()
+    # rewards, actor_losses, critic_losses = recommend.train_model()
+    # could calculate rewards for experience replay for now
+    experiences = db.get_all_experiences()
+    recs = []
+    for exp in experiences:
+        rec = exp[3]
+        click = db.get_click_by_id(rec)
+        recs.append(click)
+    rewards = reward.calculate_reward(-1, recs)
     test = "actorcritic"
     print("Rewards")
     print(rewards)
