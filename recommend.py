@@ -265,6 +265,8 @@ def train_model():
                     print("Clicks", flush=True)
                     print(clicks, flush=True)
                     state = get_inputs(clicks)
+                    print("State", flush=True)
+                    print(state, flush=True)
                     value = critic.predict(state)
                     values[i] = value
                     # need to get input for recommendation
@@ -276,6 +278,8 @@ def train_model():
                     print(recs, flush=True)
                     next_state = get_inputs(recs)
                     next_value = critic.predict(next_state)
+                    print("NextState", flush=True)
+                    print(next_value, flush=True)
                     # need to get actual clicks from click_ids
                     reward_val = reward.calculate_reward(client_id, recommend)
                     print(reward_val)
