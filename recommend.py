@@ -277,6 +277,7 @@ def train_model():
                     state = np.array(state)
                     state = state.flatten()
                     state = state.reshape((-1, state.shape[0]))
+                    state = tf.constant(state)
                     print("State", flush=True)
                     print(state, flush=True)
                     value = critic.predict(state)
@@ -292,14 +293,18 @@ def train_model():
                     next_state = np.array(next_state)
                     next_state = next_state.flatten()
                     next_state = next_state.reshape((-1, next_state.shape[0]))
+                    next_state = tf.constant(next_state)
                     next_value = critic.predict(next_state)
                     print("NextState", flush=True)
                     print(next_state, flush=True)
                     # need to get actual clicks from click_ids
                     reward_val = reward.calculate_reward(client_id, recs)
                     print(reward_val)
+                    reward_val = tf.constant(reward_val)
                     rewards = rewards.write(i, reward_val)
-                    target = reward_val + config["gamma"] * next_value
+                    gamma = config["gamma"]
+                    gamma = tf.constant(gamma)
+                    target = reward_val + gamma * next_value
                     advantage = target - value
                     advantages = advantages.write(i, advantage)
 
