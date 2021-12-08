@@ -251,7 +251,7 @@ def train_model():
                 for i, sample in enumerate(batch):
                     print("Sample")
                     print(sample)
-                    click_ids = sample[0]
+                    click_ids = sample[1]
                     # need to get click from click_id
                     clicks = []
                     print("click_ids")
@@ -260,8 +260,8 @@ def train_model():
                         click = db.get_click_by_id(c_id)
                         clicks.append(click)
 
-                    client_id = clicks[0][2]
-                    recommend = sample[2]
+                    client_id = clicks[1][2]
+                    recommend = sample[3]
                     state = get_inputs(clicks)
                     value = critic.predict(state)
                     values[i] = value
@@ -274,7 +274,7 @@ def train_model():
                     advantage = target - value
                     advantages[i] = advantage
 
-                    probs = sample[1]
+                    probs = sample[2]
 
                     log_probs = tf.math.log(probs)
                     all_probs[i] = log_probs
