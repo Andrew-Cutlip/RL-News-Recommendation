@@ -300,7 +300,7 @@ def train_model():
                     clipped = k.clip(probs, 1e-8, 1 - 1e-8)
 
                     log_probs = tf.math.log(clipped)
-                    all_probs = all_probs.write(log_probs)
+                    all_probs = all_probs.write(i, log_probs)
 
                 rewards = rewards.stack()
                 rewards = tf.reshape(rewards, [rewards.shape[0], -1])
