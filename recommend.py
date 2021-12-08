@@ -303,7 +303,7 @@ def train_model():
                     reward_val = tf.constant(reward_val)
                     rewards = rewards.write(i, reward_val)
                     gamma = config["gamma"]
-                    gamma = tf.constant(gamma)
+                    # gamma = tf.constant(gamma)
                     target = reward_val + gamma * next_value
                     advantage = target - value
                     advantages = advantages.write(i, advantage)
@@ -347,4 +347,4 @@ def train_model():
         print("Batch size too small at")
         print(len(replay_buffer))
 
-    return all_rewards, actor_losses
+    return all_rewards, actor_losses, critic_losses

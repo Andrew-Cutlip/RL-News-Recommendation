@@ -55,7 +55,7 @@ def home():
     # print("Last clicks")
     # print(last_clicks, flush=True)
     # add training of model
-    rewards, actor_losses = recommend.train_model()
+    rewards, actor_losses, crtic_losses = recommend.train_model()
     test = "actorcritic"
     print("Rewards")
     print(rewards)
