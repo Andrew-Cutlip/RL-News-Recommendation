@@ -245,7 +245,7 @@ def train_model():
             batch = buff[indices]
             with tf.GradientTape() as tape:
                 values = tf.TensorArray(dtype=tf.float32, size=0, dynamic_size=True)
-                all_probs = tf.TensorArray(dtype=tf.float64, size=0, dynamic_size=True)
+                all_probs = tf.TensorArray(dtype=tf.float32, size=0, dynamic_size=True)
                 advantages = tf.TensorArray(dtype=tf.float32, size=0, dynamic_size=True)
                 rewards = tf.TensorArray(dtype=tf.float32, size=0, dynamic_size=True)
                 for i, sample in enumerate(batch):
