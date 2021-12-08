@@ -244,10 +244,10 @@ def train_model():
             indices = np.random.choice(len(replay_buffer), batch_size, replace=False)
             batch = buff[indices]
             with tf.GradientTape() as tape:
-                values = tf.zeros(batch_size)
-                all_probs = tf.zeros(batch_size)
-                advantages = tf.zeros(batch_size)
-                rewards = tf.zeros(batch_size)
+                values = tf.TensorArray(dtype=tf.float32, size=0, dynamic_size=True)
+                all_probs = tf.TensorArray(dtype=tf.float64, size=0, dynamic_size=True)
+                advantages = tf.TensorArray(dtype=tf.float32, size=0, dynamic_size=True)
+                rewards = tf.TensorArray(dtype=tf.float32, size=0, dynamic_size=True)
                 for i, sample in enumerate(batch):
                     print("Sample", flush=True)
                     print(sample, flush=True)
@@ -271,7 +271,7 @@ def train_model():
                     print("State", flush=True)
                     print(state, flush=True)
                     value = critic.predict(state)
-                    values[i] = value
+                    values = values.write(i, value)
                     # need to get input for recommendation
                     recs = []
                     for r_id in recommend:
@@ -289,15 +289,15 @@ def train_model():
                     # need to get actual clicks from click_ids
                     reward_val = reward.calculate_reward(client_id, recommend)
                     print(reward_val)
-                    rewards[i] = reward_val
+                    rewards = rewards.write(i, reward_val)
                     target = reward_val + config["gamma"] * next_value
                     advantage = target - value
-                    advantages[i] = advantage
+                    advantages = advantages.write(i, advantage)
 
                     probs = sample[2]
 
                     log_probs = tf.math.log(probs)
-                    all_probs[i] = log_probs
+                    all_probs = all_probs.write(log_probs)
 
                 critic.fit(values, advantages)
 
