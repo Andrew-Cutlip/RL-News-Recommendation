@@ -59,13 +59,16 @@ def home():
     # rewards, actor_losses, critic_losses = recommend.train_model()
     # could calculate rewards for experience replay for now
     experiences = db.get_all_experiences()
-    recs = []
+    rewards = []
     for exp in experiences:
         rec = exp[3]
         print(rec, flush=True)
-        click = db.get_click_by_id(rec)
-        recs.append(click)
-    rewards = reward.calculate_reward(-1, recs)
+        clicks = []
+        for r_id in rec:
+            click = db.get_click_by_id(r_id)
+            clicks.append(click)
+        r = reward.calculate_reward(-1, clicks)
+        rewards.append(r)
     test = "actorcritic"
     print("Rewards")
     print(rewards)
